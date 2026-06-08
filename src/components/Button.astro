@@ -15,9 +15,8 @@ const {
   disabled = false,
   ...rest
 } = Astro.props;
-const Tag = href ? 'a' : 'button';
 ---
-{Tag === 'a' ? (
+{href ? (
   <a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`]} {...rest}>
     <slot />
   </a>

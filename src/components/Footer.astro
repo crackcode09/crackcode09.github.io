@@ -11,11 +11,18 @@ const social = [
   <div class="footer-inner">
     <Wordmark size={22} />
     <div class="social">
-      {social.map(({ label, href }) => (
-        <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
-          {label} →
-        </a>
-      ))}
+      {social.map(({ label, href }) => {
+        const isExternal = !href.startsWith('mailto:');
+        return (
+          <a
+            href={href}
+            aria-label={label}
+            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {label} →
+          </a>
+        );
+      })}
     </div>
     <span class="copy">© {year} · nidhin dileepkumar</span>
   </div>
