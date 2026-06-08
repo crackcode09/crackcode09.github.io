@@ -1,0 +1,55 @@
+---
+interface Props {
+  variant?: 'primary' | 'ghost';
+  size?: 'sm' | 'md';
+  href?: string;
+  type?: 'button' | 'submit';
+  disabled?: boolean;
+  [key: string]: unknown;
+}
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  ...rest
+} = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+{Tag === 'a' ? (
+  <a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`]} {...rest}>
+    <slot />
+  </a>
+) : (
+  <button type={type} disabled={disabled} class:list={['btn', `btn--${variant}`, `btn--${size}`]} {...rest}>
+    <slot />
+  </button>
+)}
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    cursor: pointer;
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.1s ease;
+    white-space: nowrap;
+  }
+  .btn:active { transform: scale(0.97); }
+  .btn--primary { background: var(--ink); color: var(--paper); }
+  .btn--primary:hover { background: var(--blood); border-color: var(--blood); }
+  .btn--ghost { background: transparent; color: var(--ink); }
+  .btn--ghost:hover { background: var(--ink); color: var(--paper); }
+  .btn--md { font-size: 13px; padding: 10px 20px; }
+  .btn--sm { font-size: 11px; padding: 6px 14px; }
+  .btn:disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .btn { transition: none; }
+    .btn:active { transform: none; }
+  }
+</style>

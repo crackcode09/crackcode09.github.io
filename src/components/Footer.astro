@@ -1,0 +1,47 @@
+---
+import Wordmark from './Wordmark.astro';
+const year = new Date().getFullYear();
+const social = [
+  { label: 'github', href: 'https://github.com/crackcode09' },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/dnidhin97/' },
+  { label: 'email', href: 'mailto:dileepkumarnidhin@outlook.com' },
+];
+---
+<footer>
+  <div class="footer-inner">
+    <Wordmark size={22} />
+    <div class="social">
+      {social.map(({ label, href }) => (
+        <a href={href} target="_blank" rel="noopener noreferrer" aria-label={label}>
+          {label} →
+        </a>
+      ))}
+    </div>
+    <span class="copy">© {year} · nidhin dileepkumar</span>
+  </div>
+</footer>
+<style>
+  footer { border-top: var(--border); background: var(--paper-2); }
+  .footer-inner {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: var(--space-4);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .social { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .social a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .social a:hover { color: var(--blood); }
+  .copy { font-family: var(--font-mono); font-size: 11px; color: var(--ink-60); }
+</style>

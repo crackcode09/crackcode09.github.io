@@ -1,0 +1,28 @@
+---
+interface Props {
+  variant?: 'solid' | 'outline';
+}
+const { variant = 'solid' } = Astro.props;
+---
+<span class:list={['chip', `chip--${variant}`]}>
+  <slot />
+</span>
+<style>
+  .chip {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 3px 8px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .chip--solid { background: var(--ink); color: var(--paper); }
+  .chip--outline {
+    background: transparent;
+    color: var(--ink-60);
+    border: 1px solid var(--ink-60);
+  }
+</style>

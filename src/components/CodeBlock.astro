@@ -1,0 +1,37 @@
+---
+interface Props {
+  label?: string;
+}
+const { label } = Astro.props;
+---
+<div class="codeblock">
+  {label && <div class="codeblock__label">{label}</div>}
+  <pre class="codeblock__pre"><code><slot /></code></pre>
+</div>
+<style>
+  .codeblock {
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .codeblock__label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(232,228,216,0.5);
+    padding: 8px 14px 4px;
+    border-bottom: 1px solid rgba(232,228,216,0.1);
+  }
+  .codeblock__pre {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.7;
+    padding: 12px 14px;
+    overflow-x: auto;
+    white-space: pre;
+    color: var(--paper);
+  }
+</style>

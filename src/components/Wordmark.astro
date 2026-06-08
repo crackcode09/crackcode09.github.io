@@ -1,0 +1,22 @@
+---
+interface Props {
+  size?: number;
+  onInk?: boolean;
+}
+const { size = 24, onInk = false } = Astro.props;
+---
+<span
+  class="wordmark"
+  style={`font-size: ${size}px; color: ${onInk ? 'var(--paper)' : 'var(--ink)'}`}
+>
+  nidhin<span class="dot">.</span>dev
+</span>
+<style>
+  .wordmark {
+    font-family: var(--font-display);
+    line-height: 1;
+    user-select: none;
+    text-transform: lowercase;
+  }
+  .dot { color: var(--blood); }
+</style>

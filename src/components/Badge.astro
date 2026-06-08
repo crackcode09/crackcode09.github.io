@@ -1,0 +1,25 @@
+---
+interface Props {
+  accent?: 'red' | 'green' | 'gold' | 'muted';
+}
+const { accent = 'muted' } = Astro.props;
+---
+<span class:list={['badge', `badge--${accent}`]}>
+  <slot />
+</span>
+<style>
+  .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+  .badge--red { background: var(--blood); color: var(--paper); }
+  .badge--green { background: var(--signal); color: var(--paper); }
+  .badge--gold { background: var(--gold); color: var(--ink); }
+  .badge--muted { background: rgba(11,14,13,0.1); color: var(--ink-60); }
+</style>

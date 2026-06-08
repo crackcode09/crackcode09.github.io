@@ -1,0 +1,25 @@
+---
+interface Props {
+  accent?: 'red' | 'green' | 'gold' | 'muted';
+}
+const { accent = 'muted' } = Astro.props;
+---
+<span class:list={['label', `label--${accent}`]}>
+  <slot />
+</span>
+<style>
+  .label {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    padding: 4px 10px;
+    border: 1.5px solid;
+  }
+  .label--red { color: var(--blood); border-color: var(--blood); }
+  .label--green { color: var(--signal); border-color: var(--signal); }
+  .label--gold { color: var(--gold); border-color: var(--gold); }
+  .label--muted { color: var(--ink-60); border-color: var(--ink-60); }
+</style>
