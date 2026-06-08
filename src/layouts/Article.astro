@@ -1,0 +1,279 @@
+---
+import Base from './Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Chip from '../components/Chip.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  tag: string;
+  excerpt: string;
+  readingTime?: number;
+}
+
+const { title, date, tag, excerpt, readingTime } = Astro.props;
+
+const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
+---
+
+<Base title={title} description={excerpt}>
+  <Header />
+
+  <article class="article-page">
+    <div class="container">
+      <header class="article-header">
+        <div class="article-meta">
+          <time datetime={date.toISOString()} class="article-date">{formattedDate}</time>
+          <Chip variant="outline">{tag}</Chip>
+          {readingTime && <span class="article-reading-time">{readingTime} min read</span>}
+        </div>
+        <h1 class="article-title">{title}</h1>
+        <p class="article-excerpt">{excerpt}</p>
+        <div class="article-divider"></div>
+      </header>
+
+      <div class="article-body">
+        <slot />
+      </div>
+
+      <aside class="article-subscribe">
+        <p class="subscribe-label">enjoyed this? get new articles in your inbox</p>
+        <iframe
+          src="https://embeds.beehiiv.com/FORM_ID"
+          data-test-id="beehiiv-embed"
+          title="Newsletter signup form"
+          class="beehiiv-embed"
+        ></iframe>
+      </aside>
+
+      <nav class="article-nav">
+        <a href="/writing/" class="back-link">← all field notes</a>
+      </nav>
+    </div>
+  </article>
+
+  <Footer />
+</Base>
+
+<style>
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .article-page {
+    padding: var(--space-6) 0 var(--space-7);
+  }
+
+  .article-header {
+    margin-bottom: var(--space-5);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-3);
+  }
+
+  .article-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .article-reading-time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .article-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 52px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    text-wrap: balance;
+    margin-bottom: var(--space-3);
+  }
+
+  .article-excerpt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.45;
+    color: var(--ink-60);
+    max-width: 52ch;
+  }
+
+  .article-divider {
+    height: 3px;
+    background: var(--blood);
+    width: 48px;
+    margin-top: var(--space-4);
+  }
+
+  /* Article body — markdown content */
+  .article-body {
+    font-family: var(--font-serif);
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: var(--space-6);
+  }
+
+  .article-body :global(h2) {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 28px);
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+    margin: var(--space-5) 0 var(--space-2);
+    line-height: 1.1;
+  }
+
+  .article-body :global(h3) {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin: var(--space-4) 0 var(--space-2);
+    color: var(--ink-60);
+  }
+
+  .article-body :global(p) {
+    margin-bottom: var(--space-3);
+    max-width: 65ch;
+  }
+
+  .article-body :global(ul),
+  .article-body :global(ol) {
+    padding-left: var(--space-4);
+    margin-bottom: var(--space-3);
+  }
+
+  .article-body :global(li) {
+    margin-bottom: var(--space-1);
+    max-width: 65ch;
+  }
+
+  .article-body :global(blockquote) {
+    border-left: 3px solid var(--blood);
+    padding-left: var(--space-3);
+    margin: var(--space-4) 0;
+    font-style: italic;
+    color: var(--ink-60);
+  }
+
+  .article-body :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--paper-2);
+    padding: 2px 6px;
+    border: var(--border);
+  }
+
+  .article-body :global(pre) {
+    background: var(--ink);
+    color: var(--paper);
+    padding: var(--space-4);
+    overflow-x: auto;
+    margin-bottom: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .article-body :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: inherit;
+  }
+
+  .article-body :global(a) {
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .article-body :global(a:hover) {
+    color: var(--blood);
+  }
+
+  .article-body :global(hr) {
+    border: none;
+    border-top: var(--border);
+    margin: var(--space-5) 0;
+  }
+
+  .article-body :global(strong) {
+    font-weight: 700;
+  }
+
+  .article-body :global(em) {
+    font-style: italic;
+  }
+
+  /* Subscribe aside */
+  .article-subscribe {
+    border-top: var(--border);
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .subscribe-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink-60);
+    margin-bottom: var(--space-2);
+  }
+
+  .beehiiv-embed {
+    border: none;
+    overflow: hidden;
+    width: 100%;
+    height: 52px;
+  }
+
+  /* Back nav */
+  .article-nav {
+    padding-top: var(--space-3);
+    border-top: var(--border);
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-60);
+    text-decoration: none;
+  }
+
+  .back-link:hover {
+    color: var(--blood);
+  }
+
+  @media (max-width: 768px) {
+    .article-body {
+      font-size: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-link {
+      transition: none;
+    }
+  }
+</style>
