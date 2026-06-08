@@ -94,7 +94,7 @@ const social = [
       <div class="section-rule"><span>selected work</span></div>
       <div class="projects-grid">
         {projects.map((p) => (
-          <article class="project-card" style={`border-top: 3px solid ${liftColors[p.lift]}`}>
+          <article class="project-card" style={`border-top: 3px solid ${liftColors[p.lift]}; --lift-color: ${liftColors[p.lift]}`}>
             <h3 class="project-name">{p.name}</h3>
             <div class="project-tags">
               {p.tags.map((t) => <Chip variant="outline">{t}</Chip>)}
@@ -146,7 +146,11 @@ const social = [
       </div>
       <div class="subscribe">
         <p class="subscribe-label">get new articles in your inbox</p>
-        <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="6394f033-21b2-4496-9918-554c898790f1"></script>
+        <iframe
+          src="https://embeds.beehiiv.com/6394f033-21b2-4496-9918-554c898790f1"
+          title="Newsletter signup form"
+          class="beehiiv-embed"
+        ></iframe>
       </div>
     </div>
   </section>
@@ -290,6 +294,11 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .project-card:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 11px 11px 0 var(--lift-color);
   }
   .project-name {
     font-family: var(--font-display);
@@ -334,7 +343,12 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
     padding: 18px 0;
     text-decoration: none;
   }
-  .post-row--published { color: var(--paper); cursor: pointer; }
+  .post-row--published {
+    color: var(--paper);
+    cursor: pointer;
+    transition: transform 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .post-row--published:hover { transform: translateX(-6px); }
   .post-row--draft { color: rgba(232,228,216,0.4); cursor: default; }
   .post-date { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; min-width: 92px; }
   .post-date--published { color: var(--gold); }
@@ -366,6 +380,8 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
     .about-grid { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .post-row { transition: none; }
+    .post-row, .project-card { transition: none; }
+    .post-row--published:hover { transform: none; }
+    .project-card:hover { transform: none; box-shadow: none; }
   }
 </style>
