@@ -1,0 +1,138 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+import Label from '../components/Label.astro';
+---
+
+<Base title="404 · process defect · nidhin dileepkumar" description="This page has a defect.">
+  <Header />
+
+  <main class="not-found">
+    <div class="container">
+      <Label accent="red">process defect detected</Label>
+      <p class="code">404</p>
+      <h1 class="headline">this process has a defect.</h1>
+      <p class="sub">
+        The page you requested does not exist — or was moved without updating the control plan.
+      </p>
+      <div class="dmaic">
+        <div class="dmaic-step">
+          <span class="step-label">define</span>
+          <span class="step-value">page not found</span>
+        </div>
+        <div class="dmaic-step">
+          <span class="step-label">measure</span>
+          <span class="step-value">404 error · 1 occurrence</span>
+        </div>
+        <div class="dmaic-step">
+          <span class="step-label">analyze</span>
+          <span class="step-value">broken link or typo in URL</span>
+        </div>
+        <div class="dmaic-step">
+          <span class="step-label">improve</span>
+          <span class="step-value">navigate to a valid page</span>
+        </div>
+        <div class="dmaic-step">
+          <span class="step-label">control</span>
+          <span class="step-value">update your bookmark</span>
+        </div>
+      </div>
+      <div class="actions">
+        <Button href="/">go home</Button>
+        <Button href="/writing/" variant="ghost">read field notes</Button>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .container {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .not-found {
+    padding: var(--space-7) 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .code {
+    font-family: var(--font-display);
+    font-size: clamp(80px, 20vw, 200px);
+    line-height: 0.9;
+    color: var(--blood);
+    letter-spacing: -0.04em;
+    text-transform: lowercase;
+    margin: var(--space-3) 0;
+    text-wrap: nowrap;
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 40px);
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    margin-bottom: var(--space-3);
+    text-wrap: balance;
+  }
+
+  .sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(15px, 2vw, 18px);
+    color: var(--ink-60);
+    max-width: 52ch;
+    line-height: 1.5;
+    margin-bottom: var(--space-5);
+  }
+
+  .dmaic {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 480px;
+    border: var(--border);
+    margin-bottom: var(--space-5);
+  }
+
+  .dmaic-step {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: var(--space-3);
+    align-items: center;
+    padding: var(--space-2) var(--space-3);
+    border-bottom: var(--border);
+  }
+
+  .dmaic-step:last-child {
+    border-bottom: none;
+  }
+
+  .step-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--blood);
+  }
+
+  .step-value {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-60);
+  }
+
+  .actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+  }
+</style>
