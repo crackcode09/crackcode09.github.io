@@ -66,7 +66,7 @@ import Button from './Button.astro';
   }
   .wordmark-link { text-decoration: none; }
   nav { display: flex; align-items: center; gap: var(--space-3); }
-  nav a {
+  nav a:not(.btn) {
     font-family: var(--font-mono);
     font-size: 13px;
     font-weight: 700;
@@ -75,7 +75,7 @@ import Button from './Button.astro';
     color: var(--ink);
     text-decoration: none;
   }
-  nav a:hover { color: var(--blood); }
+  nav a:not(.btn):hover { color: var(--blood); }
   nav :global(.subscribe-btn) { background: var(--blood); border-color: var(--blood); color: var(--paper); }
   nav :global(.subscribe-btn:hover) { background: var(--ink); border-color: var(--ink); }
 
