@@ -4,18 +4,27 @@ interface Props {
   onInk?: boolean;
 }
 const { size = 24, onInk = false } = Astro.props;
+const iconSize = Math.round(size * 0.85);
 ---
 <span
   class="wordmark"
-  style={`font-size: ${size}px; color: ${onInk ? 'var(--paper)' : 'var(--ink)'}`}
+  style={`color: ${onInk ? 'var(--paper)' : 'var(--ink)'}`}
 >
-  nidhy<span class="dot">.</span>dev
+  <img src="/favicon.svg" alt="" width={iconSize} height={iconSize} class="wordmark-icon" />
+  <span class="wordmark-text" style={`font-size: ${size}px`}>nidhy<span class="dot">.</span>dev</span>
 </span>
 <style>
   .wordmark {
-    font-family: var(--font-display);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     line-height: 1;
     user-select: none;
+  }
+  .wordmark-icon { display: block; flex-shrink: 0; }
+  .wordmark-text {
+    font-family: var(--font-display);
+    line-height: 1;
     text-transform: lowercase;
   }
   .dot { color: var(--blood); }
