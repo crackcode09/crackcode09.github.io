@@ -1,0 +1,70 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'nidhin dileepkumar',
+  description = 'systems engineer · web builder · lean six sigma · ai. building in the open.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://embeds.beehiiv.com; img-src 'self' data:;"
+    />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#work">skip to content</a>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/tokens.css';
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    position: relative;
+  }
+
+  button:focus, a:focus { outline: 3px solid var(--blood); outline-offset: 2px; }
+  input:focus { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+  .skip-link {
+    position: absolute;
+    top: -999px;
+    left: 0;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 8px 16px;
+    z-index: 9999;
+    text-decoration: none;
+  }
+  .skip-link:focus { top: 0; }
+</style>
