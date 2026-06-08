@@ -11,7 +11,7 @@ import Button from './Button.astro';
       <a href="/#work">work</a>
       <a href="/#writing">writing</a>
       <a href="/#about">about</a>
-      <Button href="/#writing" size="sm">subscribe</Button>
+      <Button href="/#writing" size="sm" class="subscribe-btn">subscribe</Button>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="open menu" aria-expanded="false" aria-controls="main-nav">
       <span></span><span></span><span></span>
@@ -76,6 +76,8 @@ import Button from './Button.astro';
     text-decoration: none;
   }
   nav a:hover { color: var(--blood); }
+  nav :global(.subscribe-btn) { background: var(--blood); border-color: var(--blood); color: var(--paper); }
+  nav :global(.subscribe-btn:hover) { background: var(--ink); border-color: var(--ink); }
 
   /* Hamburger button — hidden on desktop */
   .hamburger {
