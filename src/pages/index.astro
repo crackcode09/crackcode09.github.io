@@ -9,17 +9,17 @@ import Panel from '../components/Panel.astro';
 import CodeBlock from '../components/CodeBlock.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = await getCollection('writing', ({ data }) => data.published === true);
+const allPosts = await getCollection('writing');
 const recentPosts = allPosts
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+  .slice(0, 6);
 
 const projects = [
   {
     name: 'real-time spc system',
     lift: 'red' as const,
     tags: ['powerbi', 'sql', 'python'],
-    blurb: 'Statistical process control dashboard monitoring 3 production lines with real-time control charts, OOC alerts, and capability indices.',
+    blurb: 'Built real-time Statistical Process Control dashboards for 3 production lines. Achieved $70–85K annual savings and 30–40% scrap reduction.',
     type: 'article',
     href: '#',
     comingSoon: true,
@@ -28,7 +28,7 @@ const projects = [
     name: 'digital inspection platform',
     lift: 'green' as const,
     tags: ['powerbi', 'automation', 'leadership'],
-    blurb: 'Cross-functional platform replacing paper-based inspection workflows with digital forms, automated routing, and live quality metrics.',
+    blurb: 'Coordinated 4 departments to design and deploy a digital quality inspection system serving 40+ users. Delivered $30K+ annual savings.',
     type: 'article',
     href: '#',
     comingSoon: true,
@@ -37,7 +37,7 @@ const projects = [
     name: 'process optimization suite',
     lift: 'gold' as const,
     tags: ['lean', 'dmaic', 'vsmapping'],
-    blurb: 'Value stream mapping and DMAIC toolset used across 4 improvement projects, reducing lead time and eliminating non-value-added steps.',
+    blurb: 'Led cross-functional Kaizen events and Value Stream Mapping initiatives. Reduced cycle time 15%, eliminated $90K in annual waste.',
     type: 'article',
     href: '#',
     comingSoon: true,
@@ -60,9 +60,9 @@ const social = [
   <section id="top" class="hero">
     <Label accent="red">systems engineer · web builder · lean six sigma · ai</Label>
     <h1 class="hero-h1">
-      build systems.<br />
-      ship tools.<br />
-      share the work.
+      build systems<span class="dot">.</span><br />
+      ship tools<span class="dot">.</span><br />
+      share the work<span class="dot">.</span>
     </h1>
     <p class="hero-sub">
       Industrial engineer who thinks in systems — fixing broken processes by day,
@@ -118,20 +118,28 @@ const social = [
     <div class="container">
       <h2 class="writing-heading">field notes</h2>
       <div class="posts">
-        {recentPosts.length > 0 ? recentPosts.map((post, i) => (
-          <a
-            href={`/writing/${post.id}/`}
-            class:list={['post-row', { 'post-row--last': i === recentPosts.length - 1 }]}
-          >
-            <span class="post-date">
-              {post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}
-            </span>
-            <span class="post-title">{post.data.title}</span>
-            <span class="post-tag">{post.data.tag}</span>
-          </a>
-        )) : (
-          <p class="posts-empty">articles coming soon.</p>
-        )}
+        {recentPosts.map((post, i) => (
+          <div>
+            {post.data.published ? (
+              <a href={`/writing/${post.id}/`} class="post-row post-row--published">
+                <span class="post-date post-date--published">
+                  {post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}
+                </span>
+                <span class="post-title">{post.data.title}</span>
+                <span class="post-tag">#{post.data.tag}</span>
+              </a>
+            ) : (
+              <div class="post-row post-row--draft">
+                <span class="post-date post-date--draft">
+                  {post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}
+                </span>
+                <span class="post-title">{post.data.title}</span>
+                <span class="post-drafting">drafting</span>
+              </div>
+            )}
+            {i < recentPosts.length - 1 && <hr class="post-divider" />}
+          </div>
+        ))}
       </div>
       <div class="all-writing">
         <Button href="/writing/" variant="ghost">all field notes →</Button>
@@ -226,12 +234,14 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
   .hero-h1 {
     font-family: var(--font-display);
     font-size: clamp(40px, 8vw, 96px);
-    line-height: 0.95;
+    line-height: 0.88;
     letter-spacing: -0.02em;
     text-transform: lowercase;
     text-wrap: balance;
     margin: var(--space-2) 0;
+    max-width: 14ch;
   }
+  .hero-h1 .dot { color: var(--blood); }
   .hero-sub {
     font-family: var(--font-serif);
     font-style: italic;
@@ -325,22 +335,21 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
   }
   .posts { margin-bottom: var(--space-4); }
   .post-row {
-    display: grid;
-    grid-template-columns: 100px 1fr auto;
-    gap: var(--space-3);
+    display: flex;
     align-items: baseline;
-    padding: var(--space-3) 0;
-    border-bottom: 1px solid rgba(232,228,216,0.12);
+    gap: var(--space-3);
+    padding: 18px 0;
     text-decoration: none;
-    color: var(--paper);
-    transition: color 0.15s ease;
   }
-  .post-row--last { border-bottom: none; }
-  .post-row:hover { color: var(--blood); }
-  .post-date { font-family: var(--font-mono); font-size: 11px; color: rgba(232,228,216,0.5); white-space: nowrap; }
-  .post-title { font-family: var(--font-serif); font-style: italic; font-size: 16px; }
-  .post-tag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(232,228,216,0.5); }
-  .posts-empty { font-family: var(--font-mono); font-size: 13px; color: rgba(232,228,216,0.5); padding: var(--space-4) 0; }
+  .post-row--published { color: var(--paper); cursor: pointer; }
+  .post-row--draft { color: rgba(232,228,216,0.4); cursor: default; }
+  .post-date { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.1em; min-width: 92px; }
+  .post-date--published { color: var(--gold); }
+  .post-date--draft { color: rgba(232,228,216,0.3); }
+  .post-title { font-family: var(--font-serif); font-style: italic; font-size: clamp(16px, 2vw, 22px); flex: 1; }
+  .post-tag { font-family: var(--font-mono); font-size: 11px; color: rgba(232,228,216,0.6); }
+  .post-drafting { font-family: var(--font-mono); font-size: 10px; color: rgba(232,228,216,0.35); text-transform: uppercase; letter-spacing: 0.2em; }
+  .post-divider { border: none; border-top: 2px dashed rgba(232,228,216,0.25); margin: 0; }
   .all-writing { margin-bottom: var(--space-4); }
   .subscribe { margin-top: var(--space-5); }
   .subscribe-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(232,228,216,0.5); margin-bottom: var(--space-2); }
@@ -361,8 +370,6 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
 
   @media (max-width: 768px) {
     .about-grid { grid-template-columns: 1fr; }
-    .post-row { grid-template-columns: 1fr; }
-    .post-date, .post-tag { display: none; }
   }
   @media (prefers-reduced-motion: reduce) {
     .post-row { transition: none; }
