@@ -1,17 +1,356 @@
 ---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Label from '../components/Label.astro';
+import Button from '../components/Button.astro';
+import Chip from '../components/Chip.astro';
+import Panel from '../components/Panel.astro';
+import CodeBlock from '../components/CodeBlock.astro';
+import { getCollection } from 'astro:content';
 
+const allPosts = await getCollection('writing', ({ data }) => data.published === true);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const projects = [
+  {
+    name: 'real-time spc system',
+    lift: 'red' as const,
+    tags: ['powerbi', 'sql', 'python'],
+    blurb: 'Statistical process control dashboard monitoring 3 production lines with real-time control charts, OOC alerts, and capability indices.',
+    type: 'article',
+    href: '#',
+    comingSoon: true,
+  },
+  {
+    name: 'digital inspection platform',
+    lift: 'green' as const,
+    tags: ['powerbi', 'automation', 'leadership'],
+    blurb: 'Cross-functional platform replacing paper-based inspection workflows with digital forms, automated routing, and live quality metrics.',
+    type: 'article',
+    href: '#',
+    comingSoon: true,
+  },
+  {
+    name: 'process optimization suite',
+    lift: 'gold' as const,
+    tags: ['lean', 'dmaic', 'vsmapping'],
+    blurb: 'Value stream mapping and DMAIC toolset used across 4 improvement projects, reducing lead time and eliminating non-value-added steps.',
+    type: 'article',
+    href: '#',
+    comingSoon: true,
+  },
+];
+
+const liftColors = { red: 'var(--blood)', green: 'var(--signal)', gold: 'var(--gold)' };
+
+const social = [
+  { label: 'github', href: 'https://github.com/crackcode09' },
+  { label: 'linkedin', href: 'https://www.linkedin.com/in/dnidhin97/' },
+  { label: 'email', href: 'mailto:dileepkumarnidhin@outlook.com' },
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <Header />
+
+  <!-- Hero -->
+  <section id="top" class="hero">
+    <Label accent="red">systems engineer · web builder · lean six sigma · ai</Label>
+    <h1 class="hero-h1">
+      build systems.<br />
+      ship tools.<br />
+      share the work.
+    </h1>
+    <p class="hero-sub">
+      Industrial engineer who thinks in systems — fixing broken processes by day,
+      shipping the tools publicly at night. Building in the open.
+    </p>
+    <div class="hero-cta">
+      <Button href="#work">see the work →</Button>
+      <Button href="#writing" variant="ghost">read field notes</Button>
+    </div>
+    <div class="hero-social">
+      {social.map(({ label, href }) => {
+        const isExternal = !href.startsWith('mailto:');
+        return (
+          <a
+            href={href}
+            aria-label={label}
+            {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            {label} →
+          </a>
+        );
+      })}
+    </div>
+  </section>
+
+  <!-- Work -->
+  <section id="work" class="section">
+    <div class="container">
+      <div class="section-rule"><span>selected work</span></div>
+      <div class="projects-grid">
+        {projects.map((p) => (
+          <article class="project-card" style={`border-top: 3px solid ${liftColors[p.lift]}`}>
+            <h3 class="project-name">{p.name}</h3>
+            <div class="project-tags">
+              {p.tags.map((t) => <Chip variant="outline">{t}</Chip>)}
+            </div>
+            <p class="project-blurb">{p.blurb}</p>
+            {p.comingSoon ? (
+              <span class="coming-soon">article in progress</span>
+            ) : (
+              <Button href={p.href} variant="ghost" size="sm">
+                {p.type === 'repo' ? 'open repo →' : 'read case study →'}
+              </Button>
+            )}
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Writing -->
+  <section id="writing" class="section section--ink">
+    <div class="container">
+      <h2 class="writing-heading">field notes</h2>
+      <div class="posts">
+        {recentPosts.length > 0 ? recentPosts.map((post, i) => (
+          <a
+            href={`/writing/${post.id}/`}
+            class:list={['post-row', { 'post-row--last': i === recentPosts.length - 1 }]}
+          >
+            <span class="post-date">
+              {post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}
+            </span>
+            <span class="post-title">{post.data.title}</span>
+            <span class="post-tag">{post.data.tag}</span>
+          </a>
+        )) : (
+          <p class="posts-empty">articles coming soon.</p>
+        )}
+      </div>
+      <div class="all-writing">
+        <Button href="/writing/" variant="ghost">all field notes →</Button>
+      </div>
+      <div class="subscribe">
+        <p class="subscribe-label">get new articles in your inbox</p>
+        <iframe
+          src="https://embeds.beehiiv.com/FORM_ID"
+          data-test-id="beehiiv-embed"
+          width="100%"
+          height="52"
+          frameborder="0"
+          scrolling="no"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="section-rule"><span>about</span></div>
+      <div class="about-grid">
+        <div class="about-left">
+          <p class="about-bio">
+            Industrial engineer by training, builder by habit. I spend my days improving
+            manufacturing systems with data — SPC, DMAIC, Power BI — and my nights shipping
+            web tools in the open. I think in systems: find the constraint, remove it, measure the result.
+          </p>
+          <blockquote class="about-quote">
+            "every system is perfectly designed to get the results it gets."
+          </blockquote>
+          <p class="about-outside">
+            outside work: traveling · photography · gaming · gym · swimming · staying curious
+          </p>
+          <div class="about-chips">
+            <span class="chip-solid">open to work</span>
+            <span class="chip-outline">building in public</span>
+          </div>
+        </div>
+        <div class="about-right">
+          <Panel sunken>
+            <Label accent="muted">systems &amp; data</Label>
+            <CodeBlock label="stack.toml">{`lean    = "Six Sigma, DMAIC, VSM"
+data    = "Power BI, SQL, Python"
+quality = "SPC, FMEA, Control Plans"
+ai_data = "Claude, OpenAI, Ollama"`}</CodeBlock>
+          </Panel>
+          <Panel sunken>
+            <Label accent="muted">web &amp; build</Label>
+            <CodeBlock label="web.toml">{`frontend = "React, Next.js, HTMX"
+backend  = "Node.js, Express, Python"
+data_viz = "Chart.js, Power BI"
+platform = "Supabase, Sanity"
+build_w  = "AI-assisted"`}</CodeBlock>
+          </Panel>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Base>
+
+<style>
+  .container {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  /* Hero */
+  .hero {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: var(--space-7) var(--space-4) var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .hero-h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    text-wrap: balance;
+    margin: var(--space-2) 0;
+  }
+  .hero-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.45;
+    max-width: 52ch;
+    color: var(--ink-60);
+  }
+  .hero-cta { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-2); }
+  .hero-social { display: flex; gap: var(--space-3); flex-wrap: wrap; margin-top: var(--space-2); }
+  .hero-social a {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink-60);
+    text-decoration: none;
+  }
+  .hero-social a:hover { color: var(--blood); }
+
+  /* Sections */
+  .section { padding: var(--space-6) 0; }
+  .section--ink { background: var(--ink); color: var(--paper); }
+  .section-rule {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    border-top: var(--border);
+    padding-top: var(--space-2);
+  }
+  .section-rule span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4em;
+    color: var(--ink-60);
+    white-space: nowrap;
+  }
+
+  /* Projects */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-4);
+  }
+  .project-card {
+    background: var(--paper-2);
+    border: var(--border);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 22px);
+    line-height: 1.1;
+    text-transform: lowercase;
+  }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-blurb {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-60);
+    flex: 1;
+  }
+  .coming-soon {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    border-top: 1px dashed var(--ink-60);
+    padding-top: 10px;
+    display: block;
+  }
+
+  /* Writing section */
+  .writing-heading {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 0.95;
+    margin-bottom: var(--space-4);
+    color: var(--paper);
+    text-wrap: balance;
+    text-transform: lowercase;
+  }
+  .posts { margin-bottom: var(--space-4); }
+  .post-row {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: var(--space-3);
+    align-items: baseline;
+    padding: var(--space-3) 0;
+    border-bottom: 1px solid rgba(232,228,216,0.12);
+    text-decoration: none;
+    color: var(--paper);
+    transition: color 0.15s ease;
+  }
+  .post-row--last { border-bottom: none; }
+  .post-row:hover { color: var(--blood); }
+  .post-date { font-family: var(--font-mono); font-size: 11px; color: rgba(232,228,216,0.5); white-space: nowrap; }
+  .post-title { font-family: var(--font-serif); font-style: italic; font-size: 16px; }
+  .post-tag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(232,228,216,0.5); }
+  .posts-empty { font-family: var(--font-mono); font-size: 13px; color: rgba(232,228,216,0.5); padding: var(--space-4) 0; }
+  .all-writing { margin-bottom: var(--space-4); }
+  .subscribe { margin-top: var(--space-5); }
+  .subscribe-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(232,228,216,0.5); margin-bottom: var(--space-2); }
+
+  /* About */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+  .about-left { display: flex; flex-direction: column; gap: var(--space-3); }
+  .about-bio { font-family: var(--font-mono); font-size: 14px; line-height: 1.7; color: var(--ink-60); max-width: 52ch; }
+  .about-quote { font-family: var(--font-serif); font-style: italic; font-size: 15px; line-height: 1.5; color: var(--ink); border-left: 3px solid var(--blood); padding-left: var(--space-3); }
+  .about-outside { font-family: var(--font-mono); font-size: 12px; color: var(--ink-60); }
+  .about-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+  .chip-solid { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 3px 8px; background: var(--ink); color: var(--paper); }
+  .chip-outline { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 3px 8px; background: transparent; color: var(--ink-60); border: 1px solid var(--ink-60); }
+  .about-right { display: flex; flex-direction: column; gap: var(--space-3); }
+
+  @media (max-width: 768px) {
+    .about-grid { grid-template-columns: 1fr; }
+    .post-row { grid-template-columns: 1fr; }
+    .post-date, .post-tag { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .post-row { transition: none; }
+  }
+</style>
