@@ -1,0 +1,152 @@
+/* =================================================================
+   NIDHIN DESIGN SYSTEM — combined design tokens
+   Generated for the Astro site. Do NOT edit manually — source of
+   truth lives in the brand design system token files.
+
+   Fonts are loaded via Google Fonts CDN in Base.astro, not here.
+   Body base styles (background, color) live in Base.astro.
+   ================================================================= */
+
+:root {
+  /* ----------------------------------------------------------------
+     COLORS — editorial brutalist / risograph palette
+     One dominant surface (paper), ink for text, accents as punctuation.
+     ---------------------------------------------------------------- */
+
+  /* ---- BASE PALETTE ---- */
+  --ink: #0b0e0d;        /* near-black; text and dark surfaces */
+  --paper: #e8e4d8;      /* warm off-white; the main background. NEVER pure white */
+  --paper-2: #dcd6c4;    /* secondary surface, slightly deeper paper */
+  --blood: #c8341f;      /* primary accent — risograph red */
+  --signal: #1f6f5c;     /* secondary accent — deep signal green */
+  --gold: #d99a2b;       /* tertiary accent — warm ochre */
+
+  /* ---- TINTS / DERIVED ---- */
+  --ink-60: rgba(11, 14, 13, 0.6);   /* muted ink for secondary text */
+  --ink-30: rgba(11, 14, 13, 0.3);   /* hairline / dashed dividers */
+  --ink-12: rgba(11, 14, 13, 0.12);  /* faint rules on paper */
+  --paper-soft: #cfe8df;             /* pale green-tint used as code text on ink */
+
+  /* ---- SEMANTIC ALIASES ---- */
+  --text-strong: var(--ink);
+  --text-muted: var(--ink-60);
+  --text-on-ink: var(--paper);
+  --text-accent: var(--blood);
+
+  --surface-page: var(--paper);
+  --surface-card: var(--paper);
+  --surface-sunken: var(--paper-2);
+  --surface-inverse: var(--ink);
+
+  --accent-primary: var(--blood);
+  --accent-secondary: var(--signal);
+  --accent-tertiary: var(--gold);
+
+  --border-color: var(--ink);
+  --divider-color: var(--ink-30);
+
+  /* ----------------------------------------------------------------
+     TYPOGRAPHY — Major Mono Display + Fraunces + Space Mono
+     The mono-headline + serif-accent tension is the signature.
+     ---------------------------------------------------------------- */
+
+  /* ---- FAMILIES ---- */
+  --font-display: 'Major Mono Display', monospace; /* headlines — ALWAYS lowercase */
+  --font-serif: 'Fraunces', serif;                 /* warmth / pull-quotes — italic */
+  --font-mono: 'Space Mono', monospace;            /* body & technical text */
+
+  /* ---- DISPLAY SCALE (Major Mono Display) ---- */
+  --display-xl: 96px;   /* hero headline */
+  --display-lg: 64px;   /* page title */
+  --display-md: 40px;   /* section header */
+  --display-sm: 28px;   /* card title */
+  --display-lh: 0.92;   /* tight; mono caps need air-less stacking */
+
+  /* ---- BODY SCALE (Space Mono) ---- */
+  --text-lg: 18px;
+  --text-md: 15px;      /* default body */
+  --text-sm: 13px;
+  --text-xs: 11px;
+  --body-lh: 1.5;
+
+  /* ---- SERIF (Fraunces) ---- */
+  --serif-quote: 22px;
+  --serif-lh: 1.35;
+
+  /* ---- WEIGHTS ---- */
+  --weight-reg: 400;
+  --weight-bold: 700;
+  --weight-black: 900; /* Fraunces display weight */
+
+  /* ---- LABEL / EYEBROW ---- */
+  --label-size: 11px;
+  --label-tracking: 0.4em; /* wide letterspacing, uppercase */
+
+  /* ---- SEMANTIC ALIASES ---- */
+  --text-heading: var(--font-display);
+  --text-body: var(--font-mono);
+  --text-quote-family: var(--font-serif);
+
+  /* ----------------------------------------------------------------
+     SPACING — the brand's 5-step scale
+     ---------------------------------------------------------------- */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 38px;
+  --space-5: 60px;
+
+  /* larger rhythm for page sections / posters */
+  --space-6: 96px;
+  --space-7: 140px;
+
+  /* container widths */
+  --container-text: 680px;   /* readable measure */
+  --container-page: 1120px;  /* site max width */
+  --gutter: var(--space-3);
+
+  /* ----------------------------------------------------------------
+     SHAPE — brutalist: zero radius, chunky borders, HARD offset shadows
+     Never use soft/blurred drop shadows.
+     ---------------------------------------------------------------- */
+
+  /* ---- BORDERS ---- */
+  --border-width: 3px;
+  --border-width-thin: 2px;
+  --border: var(--border-width) solid var(--ink);
+  --border-thin: var(--border-width-thin) solid var(--ink);
+
+  /* ---- RADIUS ---- */
+  --radius: 0px; /* brutalist = no rounding, everywhere */
+
+  /* ---- HARD OFFSET SHADOWS (solid, no blur) ---- */
+  --shadow: 8px 8px 0 var(--ink);
+  --shadow-sm: 4px 4px 0 var(--ink);
+  --shadow-red: 8px 8px 0 var(--blood);
+  --shadow-green: 8px 8px 0 var(--signal);
+  --shadow-gold: 8px 8px 0 var(--gold);
+
+  /* ---- DIVIDERS ---- */
+  --divider-dashed: 2px dashed var(--ink-30);
+
+  /* ---- PAPER GRAIN (faint SVG noise overlay) ---- */
+  --grain-url: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.05'/%3E%3C/svg%3E");
+
+  /* ---- MOTION ---- */
+  --press-transition: transform .08s, box-shadow .08s;
+}
+
+/* ----------------------------------------------------------------
+   GRAIN TEXTURE — paper noise overlay applied to the page surface
+   Opacity held at 0.5 per brand spec.
+   ---------------------------------------------------------------- */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: var(--grain-url);
+  background-size: 120px 120px;
+  opacity: 0.5;
+  z-index: 9999;
+}
