@@ -142,7 +142,7 @@ const social = [
         ))}
       </div>
       <div class="all-writing">
-        <Button href="/writing/" variant="ghost">all field notes →</Button>
+        <a href="/writing/" class="all-writing-link">all field notes →</a>
       </div>
       <div class="subscribe">
         <p class="subscribe-label">get new articles in your inbox</p>
@@ -358,6 +358,20 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
   .post-drafting { font-family: var(--font-mono); font-size: 10px; color: rgba(232,228,216,0.35); text-transform: uppercase; letter-spacing: 0.2em; }
   .post-divider { border: none; border-top: 2px dashed rgba(232,228,216,0.25); margin: 0; }
   .all-writing { margin-bottom: var(--space-4); }
+  .all-writing-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--paper);
+    text-decoration: none;
+    border: 2px solid var(--paper);
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .all-writing-link:hover { background: var(--paper); color: var(--ink); }
   .subscribe { margin-top: var(--space-5); }
   .subscribe-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(232,228,216,0.5); margin-bottom: var(--space-2); }
   .subscribe-soon { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: rgba(232,228,216,0.4); margin: 0; }
