@@ -157,36 +157,47 @@ const social = [
       <div class="about-grid">
         <div class="about-left">
           <p class="about-bio">
-            Industrial engineer by training, builder by habit. I spend my days improving
-            manufacturing systems with data — SPC, DMAIC, Power BI — and my nights shipping
-            web tools in the open. I think in systems: find the constraint, remove it, measure the result.
+            I'm Nidhin — industrial engineer, systems thinker, AI builder. I fix broken processes
+            and build the tools to prove it. Four years in manufacturing CI; building in the open
+            at night. I use AI to build faster and I share everything publicly.
           </p>
           <blockquote class="about-quote">
-            "every system is perfectly designed to get the results it gets."
+            "Every broken process is a signal the system is speaking. Listen, measure, fix the root — not the symptom."
           </blockquote>
-          <p class="about-outside">
-            outside work: traveling · photography · gaming · gym · swimming · staying curious
-          </p>
-          <div class="about-chips">
-            <span class="chip-solid">open to work</span>
-            <span class="chip-outline">building in public</span>
+          <div class="about-subsection">
+            <p class="about-subsection-label">outside the work</p>
+            <p class="about-outside">
+              Travel · photography · gaming. Currently adding gym and swimming to the rotation. Staying curious is the default.
+            </p>
+          </div>
+          <div class="about-subsection">
+            <p class="about-subsection-label">open to</p>
+            <div class="about-chips">
+              <Chip variant="outline">collabs</Chip>
+              <Chip variant="outline">consulting</Chip>
+              <Chip variant="outline">talks</Chip>
+              <Chip variant="outline">open source</Chip>
+            </div>
+            <p class="about-contact">
+              reach out → <a href="mailto:dileepkumarnidhin@outlook.com" class="about-email">dileepkumarnidhin@outlook.com</a>
+            </p>
           </div>
         </div>
         <div class="about-right">
           <Panel sunken>
             <Label accent="muted">systems &amp; data</Label>
-            <CodeBlock label="stack.toml">{`lean    = "Six Sigma, DMAIC, VSM"
-data    = "Power BI, SQL, Python"
+            <CodeBlock label="stack.toml">{`lean    = "Six Sigma, DMAIC, VSM, 5S"
+data    = "Power BI, SQL, Python, Minitab"
 quality = "SPC, FMEA, Control Plans"
-ai_data = "Claude, OpenAI, Ollama"`}</CodeBlock>
+ai_data = "OpenAI, Claude, Ollama"`}</CodeBlock>
           </Panel>
           <Panel sunken>
             <Label accent="muted">web &amp; build</Label>
-            <CodeBlock label="web.toml">{`frontend = "React, Next.js, HTMX"
+            <CodeBlock label="web.toml">{`frontend = "React, Next.js, HTMX, JS"
 backend  = "Node.js, Express, Python"
 data_viz = "Chart.js, Power BI"
-platform = "Supabase, Sanity"
-build_ai = "AI-assisted"`}</CodeBlock>
+platform = "Supabase, Sanity, EJS"
+build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
           </Panel>
         </div>
       </div>
@@ -336,14 +347,16 @@ build_ai = "AI-assisted"`}</CodeBlock>
   .beehiiv-embed { border: none; overflow: hidden; width: 100%; height: 52px; }
 
   /* About */
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-5); }
+  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5); align-items: start; }
   .about-left { display: flex; flex-direction: column; gap: var(--space-3); }
-  .about-bio { font-family: var(--font-mono); font-size: 14px; line-height: 1.7; color: var(--ink-60); max-width: 52ch; }
-  .about-quote { font-family: var(--font-serif); font-style: italic; font-size: 15px; line-height: 1.5; color: var(--ink); border-left: 3px solid var(--blood); padding-left: var(--space-3); }
-  .about-outside { font-family: var(--font-mono); font-size: 12px; color: var(--ink-60); }
+  .about-bio { font-size: 15px; line-height: 1.6; margin: 0; }
+  .about-quote { font-family: var(--font-serif); font-style: italic; font-size: 15px; line-height: 1.5; color: var(--ink); border-left: 3px solid var(--signal); padding-left: var(--space-3); margin: 0; }
+  .about-subsection { border-top: var(--border); padding-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+  .about-subsection-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: var(--ink-60); margin: 0; }
+  .about-outside { font-size: 14px; line-height: 1.6; color: var(--ink-60); margin: 0; }
   .about-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .chip-solid { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 3px 8px; background: var(--ink); color: var(--paper); }
-  .chip-outline { font-family: var(--font-mono); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; padding: 3px 8px; background: transparent; color: var(--ink-60); border: 1px solid var(--ink-60); }
+  .about-contact { font-family: var(--font-mono); font-size: 13px; color: var(--ink-60); margin: 0; }
+  .about-email { color: var(--blood); text-decoration: none; font-weight: 700; }
   .about-right { display: flex; flex-direction: column; gap: var(--space-3); }
 
   @media (max-width: 768px) {
