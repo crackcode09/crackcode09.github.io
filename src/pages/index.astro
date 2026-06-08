@@ -146,14 +146,10 @@ const social = [
       </div>
       <div class="subscribe">
         <p class="subscribe-label">get new articles in your inbox</p>
-        <iframe
-          src="https://embeds.beehiiv.com/FORM_ID"
-          data-test-id="beehiiv-embed"
-          title="Newsletter signup form"
-          class="beehiiv-embed"
-          width="100%"
-          height="52"
-        ></iframe>
+        <p class="subscribe-soon">newsletter launching soon — check back shortly.</p>
+        {/* Replace the line above with the Beehiiv iframe once you have your form ID:
+        <iframe src="https://embeds.beehiiv.com/YOUR_FORM_ID" title="Newsletter signup form" class="beehiiv-embed"></iframe>
+        */}
       </div>
     </div>
   </section>
@@ -353,6 +349,7 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
   .all-writing { margin-bottom: var(--space-4); }
   .subscribe { margin-top: var(--space-5); }
   .subscribe-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(232,228,216,0.5); margin-bottom: var(--space-2); }
+  .subscribe-soon { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: rgba(232,228,216,0.4); margin: 0; }
   .beehiiv-embed { border: none; overflow: hidden; width: 100%; height: 52px; }
 
   /* About */
