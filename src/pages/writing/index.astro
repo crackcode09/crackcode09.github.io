@@ -1,0 +1,229 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('writing', ({ data }) => data.published === true);
+
+const featured = allPosts
+  .filter(p => p.data.featured)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const rest = allPosts
+  .filter(p => !p.data.featured)
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+
+const posts = [...featured, ...rest];
+---
+
+<Base title="field notes · nidhin dileepkumar" description="Articles on industrial engineering, systems thinking, AI tools, and building in public.">
+  <Header />
+
+  <main class="writing-page">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">field notes</h1>
+        <p class="page-sub">
+          Articles on industrial engineering, systems thinking, AI tools, and shipping work in public.
+        </p>
+      </div>
+
+      {posts.length === 0 ? (
+        <div class="empty">
+          <p class="empty-text">no articles published yet.</p>
+          <p class="empty-sub">check back soon — field notes incoming.</p>
+        </div>
+      ) : (
+        <ol class="posts-list" role="list">
+          {posts.map((post) => (
+            <li class:list={['post-item', { 'post-item--featured': post.data.featured }]}>
+              <a href={`/writing/${post.id}/`} class="post-link">
+                <div class="post-meta">
+                  <time datetime={post.data.date.toISOString()} class="post-date">
+                    {post.data.date.toISOString().slice(0, 10).replace(/-/g, '.')}
+                  </time>
+                  <span class="post-tag">{post.data.tag}</span>
+                  {post.data.readingTime && (
+                    <span class="post-rt">{post.data.readingTime} min</span>
+                  )}
+                  {post.data.featured && (
+                    <span class="post-featured-badge">featured</span>
+                  )}
+                </div>
+                <h2 class="post-title">{post.data.title}</h2>
+                <p class="post-excerpt">{post.data.excerpt}</p>
+              </a>
+            </li>
+          ))}
+        </ol>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .container {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .writing-page {
+    padding: var(--space-6) 0 var(--space-7);
+  }
+
+  .page-header {
+    border-top: var(--border);
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    margin-bottom: var(--space-3);
+  }
+
+  .page-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--ink-60);
+    max-width: 52ch;
+    line-height: 1.45;
+  }
+
+  .posts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .post-item {
+    border-top: var(--border);
+  }
+
+  .post-item:last-child {
+    border-bottom: var(--border);
+  }
+
+  .post-item--featured .post-link {
+    border-left: 3px solid var(--blood);
+    padding-left: var(--space-3);
+  }
+
+  .post-link {
+    display: block;
+    padding: var(--space-4) 0;
+    text-decoration: none;
+    color: var(--ink);
+    transition: color 0.15s ease;
+  }
+
+  .post-link:hover {
+    color: var(--blood);
+  }
+
+  .post-link:hover .post-excerpt {
+    color: var(--ink-60);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    flex-wrap: wrap;
+    margin-bottom: var(--space-2);
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-60);
+    background: var(--paper-2);
+    border: var(--border);
+    padding: 2px 8px;
+  }
+
+  .post-rt {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-60);
+  }
+
+  .post-featured-badge {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--blood);
+    border: 1px solid var(--blood);
+    padding: 2px 6px;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: clamp(20px, 3vw, 28px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .post-excerpt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-60);
+    max-width: 65ch;
+    transition: color 0.15s ease;
+  }
+
+  .empty {
+    padding: var(--space-6) 0;
+    border-top: var(--border);
+  }
+
+  .empty-text {
+    font-family: var(--font-display);
+    font-size: 24px;
+    text-transform: lowercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .empty-sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .post-link,
+    .post-excerpt {
+      transition: none;
+    }
+  }
+</style>
