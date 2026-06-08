@@ -43,12 +43,15 @@ const {
 
   html { scroll-behavior: smooth; }
 
+  html { overflow-x: hidden; }
+
   body {
     background: var(--paper);
     color: var(--ink);
     font-family: var(--font-mono);
     min-height: 100vh;
     position: relative;
+    overflow-x: hidden;
   }
 
   button:focus, a:focus { outline: 3px solid var(--blood); outline-offset: 2px; }

@@ -43,4 +43,9 @@ import Button from './Button.astro';
     text-decoration: none;
   }
   nav a:hover { color: var(--blood); }
+
+  @media (max-width: 540px) {
+    nav a { display: none; }
+    nav :global(.btn) { display: inline-flex; }
+  }
 </style>
