@@ -1,0 +1,13 @@
+{
+  "title": "Zero → AI Systems Engineer",
+  "slug": "zero-to-ai",
+  "description": "The free course for people who have never touched AI — absolute beginner to building real AI systems. 12 modules, 4 projects, a capstone, and ~$5 total.",
+  "status": "live",
+  "label": "free · open source · absolute beginner",
+  "accent": "green",
+  "modules": 12,
+  "projects": 4,
+  "duration": "8–16 weeks",
+  "cost": "$5",
+  "repo": "https://github.com/crackcode09/zero-to-ai-systems-engineer"
+}
