@@ -1,0 +1,376 @@
+---
+// src/pages/zero-to-ai.astro
+// "Zero → AI Systems Engineer" course landing page for nidhy.dev.
+// Drops into the existing Astro site — uses Base + Header + Footer and the
+// shared design-system components. Route: https://nidhy.dev/zero-to-ai
+//
+// Lead accent is green (var(--signal)) to match your tweak. To switch the
+// whole page to the brand red, change `--lead` in the <style> block below
+// to `var(--blood)`.
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Label from '../../components/Label.astro';
+import Button from '../../components/Button.astro';
+import Chip from '../../components/Chip.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const REPO = 'https://github.com/crackcode09/zero-to-ai-systems-engineer';
+const M00 = `${REPO}/tree/master/00-orientation`;
+const STAR = `${REPO}/stargazers`;
+const CAPSTONE = `${REPO}/tree/master/12-capstone`;
+
+const modules = [
+  ['00', 'orientation', 'explain ai, ml & llms in plain english; use ai hands-on', '1 wk'],
+  ['01', 'computer foundations', 'the terminal, git, github and vs code', '1 wk'],
+  ['02', 'python essentials', 'real programs: data, logic, files, packages', '2 wks'],
+  ['03', 'data fundamentals', 'speak json, call apis, query sql', '1 wk'],
+  ['04', 'how ai actually works', 'training vs inference, weights — the honest version', '1 wk'],
+  ['05', 'large language models', 'tokens, context windows, why hallucination happens', '1 wk'],
+  ['06', 'prompt engineering', 'reliable, structured outputs on demand', '1 wk'],
+  ['07', 'building with ai apis', 'a chatbot + an ai classification pipeline', '1–2 wks', 'build'],
+  ['08', 'rag & knowledge', 'doc-q&a from scratch in 80 lines', '1–2 wks', 'build'],
+  ['09', 'agents & tools', 'the agent loop, and what mcp really is', '1–2 wks', 'build'],
+  ['10', 'evaluation & safety', 'measure ai quality; reason about risk like a pro', '1 wk'],
+  ['11', 'deployment', 'ship a hardened fastapi service', '1–2 wks', 'build'],
+  ['12', 'capstone', 'the project that proves all of it', '2 wks', 'cap'],
+] as const;
+
+const builds = [
+  ['07', 'a real ai program', 'A chatbot and a classification pipeline calling a live model API — your first program that thinks.'],
+  ['08', 'ai that knows your docs', 'Retrieval-augmented Q&A built from scratch in ~80 lines. It answers from YOUR files, not the internet.'],
+  ['09', 'ai that takes action', 'The agent loop, tools and MCP — an assistant that does things, not just talks.'],
+  ['11', 'a service, not a script', 'A hardened FastAPI service: rate limits, errors handled, ready to deploy.'],
+] as const;
+
+const sources = ['anthropic', 'openai', 'microsoft', 'hugging face', 'harvard cs50', 'mit', 'karpathy'];
+
+const faqs = [
+  ['do i need math?', 'Arithmetic. That’s it.'],
+  ['do i need a beefy computer?', 'No — the AI runs on cloud servers. A browser is enough.'],
+  ['what’s the total cost?', '~$5 in API credits for the whole course (modules 07+). Everything else is free.'],
+  ['can this lead to a job?', 'It builds a junior-level portfolio of 4 projects + a capstone. Paired with what you already know, that’s rare.'],
+];
+
+const steps = [
+  ['01', 'star the repo — your future self has to find it again', true],
+  ['02', 'open module 00 — it needs zero setup', false],
+  ['03', 'create a notes.md — your learning journal starts now', false],
+  ['04', 'block 5–8 hrs / week — consistency beats intensity', false],
+] as const;
+---
+
+<Base
+  title="zero → ai systems engineer · nidhin"
+  description="A free, open-source course for people who have never touched AI. 12 modules, 4 projects, a capstone — and ~$5 total."
+>
+  <Header />
+
+  <div class="course">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <Label accent="green">free · open source · absolute beginner</Label>
+            <h1 class="hero-h1">zero<br />to ai<br />engineer<span class="dot">.</span></h1>
+            <p class="hero-sub">
+              The free course for people who have never touched AI — and don’t know where to start.
+              If you can use a web browser, you can start today.
+            </p>
+            <div class="hero-chips">
+              <Chip variant="outline">no cs degree</Chip>
+              <Chip variant="outline">no math beyond school</Chip>
+              <Chip variant="outline">no coding experience</Chip>
+              <Chip variant="outline">no gpu</Chip>
+            </div>
+            <div class="cta-row">
+              <Button href={M00} target="_blank" rel="noopener">start module 00 →</Button>
+              <Button href={STAR} variant="ghost" target="_blank" rel="noopener">★ star the repo</Button>
+            </div>
+          </div>
+          <div class="deal">
+            <Label accent="muted">the deal</Label>
+            <div class="deal-grid">
+              <div><div class="deal-n">$5</div><div class="deal-l">total cost, in api credits</div></div>
+              <div><div class="deal-n">12</div><div class="deal-l">modules, in strict order</div></div>
+              <div><div class="deal-n">4</div><div class="deal-l">portfolio projects + capstone</div></div>
+              <div><div class="deal-n">8–16</div><div class="deal-l">weeks at 5–8 hrs / week</div></div>
+            </div>
+            <CodeBlock label="your first 5 minutes">{`$ git clone github.com/crackcode09/zero-to-ai-systems-engineer
+$ cd zero-to-ai-systems-engineer/00-orientation
+# no setup. no install. just open the README.`}</CodeBlock>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROBLEM -->
+    <section class="section section--ink prob">
+      <div class="container">
+        <Label accent="gold">the problem with learning ai in 2026</Label>
+        <h2 class="prob-h2">nobody starts<br />from actual zero<span class="dot">.</span></h2>
+        <div class="noise">
+          <div class="noise-row"><span class="noise-x">✕</span><span class="noise-t">courses that open with calculus and linear algebra</span></div>
+          <div class="noise-row"><span class="noise-x">✕</span><span class="noise-t">tutorials about training models you will never train</span></div>
+          <div class="noise-row"><span class="noise-x">✕</span><span class="noise-t">hype videos with zero substance</span></div>
+          <div class="noise-row"><span class="noise-x">✕</span><span class="noise-t">guides that assume you already know python, git & docker</span></div>
+        </div>
+        <div class="vs">
+          <div class="vs-head"><div class="a">typical ai course</div><div class="b">this course</div></div>
+          <div class="vs-row"><div class="a">train neural nets from scratch</div><div class="b">build systems around existing ai — the actual job</div></div>
+          <div class="vs-row"><div class="a">assume you can already program</div><div class="b">starts with “what is a terminal?”</div></div>
+          <div class="vs-row"><div class="a">math-heavy theory</div><div class="b">plain-english mental models, then hands-on code</div></div>
+          <div class="vs-row"><div class="a">end with a certificate</div><div class="b">end with 4 projects + a capstone on your github</div></div>
+          <div class="vs-row"><div class="a">$500 – $5,000</div><div class="b">free, plus ~$5 of api credits</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section" id="roadmap">
+      <div class="container">
+        <div class="rule"><span>01 — the roadmap</span></div>
+        <p class="lead-copy">
+          Twelve modules, in strict order — each one builds on the last. Skipping ahead is the #1 reason
+          beginners quit. The <strong>build</strong> modules are where a portfolio piece lands on your GitHub.
+        </p>
+        <div class="rm">
+          <div class="rm-spine"></div>
+          {modules.map(([n, title, sub, time, kind]) => (
+            <div class="rm-row">
+              <div class="rm-badge-wrap">
+                <span class:list={['rm-badge', kind === 'build' && 'build', kind === 'cap' && 'cap']}>{n}</span>
+              </div>
+              <div>
+                <div class="rm-title">
+                  <h3>{title}</h3>
+                  {kind === 'build' && <span class="chip-lead">build</span>}
+                  {kind === 'cap' && <span class="chip-gold">capstone</span>}
+                </div>
+                <p class="rm-sub">{sub}</p>
+              </div>
+              <span class="rm-time">{time}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- BUILD -->
+    <section class="section section--paper2" id="build">
+      <div class="container">
+        <div class="rule"><span>02 — what you’ll build</span></div>
+        <p class="lead-copy">
+          You don’t end with a certificate. You end with things that run — four portfolio projects
+          and a capstone, all on your GitHub.
+        </p>
+        <div class="build-grid">
+          {builds.map(([n, title, blurb]) => (
+            <article class="bcard">
+              <span class="bn">{n}</span>
+              <h3>{title}</h3>
+              <p>{blurb}</p>
+            </article>
+          ))}
+        </div>
+        <div class="cap-card">
+          <div>
+            <Label accent="gold">12 · the capstone</Label>
+            <h3>prove it<span class="dot dot--gold">.</span></h3>
+            <p>Pair this with the domain you already know — healthcare, manufacturing, finance, teaching — and you become genuinely rare.</p>
+          </div>
+          <div class="cap-cta">
+            <Button href={CAPSTONE} target="_blank" rel="noopener">see the capstone →</Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- THESIS -->
+    <section class="section">
+      <div class="container">
+        <div class="thesis-grid">
+          <div>
+            <Label accent="green">the thesis</Label>
+            <figure class="thesis-fig">
+              <blockquote class="thesis-q">
+                Modern AI is an incredibly capable but unreliable component. An AI Systems Engineer builds
+                systems that harness the capability while containing the unreliability.
+              </blockquote>
+              <figcaption class="thesis-cite">— what you’ll be by module 12</figcaption>
+            </figure>
+          </div>
+          <div class="src-panel">
+            <Label accent="muted">built on primary sources</Label>
+            <p>Every module maps to authoritative material. This repo is the beginner on-ramp those resources assume you already have.</p>
+            <div class="src-chips">
+              {sources.map((s) => <Chip variant="outline">{s}</Chip>)}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section--ink" id="faq">
+      <div class="container">
+        <div class="rule"><span>03 — quick answers</span></div>
+        <div class="faq-grid">
+          {faqs.map(([q, a]) => (
+            <div><h3 class="faq-q">{q}</h3><p class="faq-a">{a}</p></div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section">
+      <div class="container">
+        <div class="final">
+          <Label accent="green">start in the next 5 minutes</Label>
+          <h2 class="final-h2">the second best<br />time is <span class="dot">now.</span></h2>
+          <p class="final-sub">The best time to start learning AI was three years ago. The second best time is in the next five minutes.</p>
+        </div>
+        <div class="steps">
+          {steps.map(([n, t, lead]) => (
+            <div class="step">
+              <span class:list={['sn', lead && 'lead']}>{n}</span>
+              <span class="step-t">{t}</span>
+            </div>
+          ))}
+        </div>
+        <div class="cta-row cta-center">
+          <Button href={M00} target="_blank" rel="noopener">start module 00 →</Button>
+          <Button href={STAR} variant="ghost" target="_blank" rel="noopener">★ star the repo</Button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <Footer />
+</Base>
+
+<style>
+  /* ===== page lead accent — change to var(--blood) for brand red ===== */
+  .course { --lead: var(--signal); }
+
+  .container { max-width: var(--container-page); margin: 0 auto; padding: 0 var(--space-4); }
+  .course { overflow-x: hidden; }
+  .course h1, .course h2, .course h3 { font-weight: 400; }
+  .course .dot { color: var(--lead); }
+  .course .dot--gold { color: var(--gold); }
+
+  /* slightly larger CTAs than the site default, on-brand */
+  .course .cta-row { display: flex; gap: var(--space-2); flex-wrap: wrap; align-items: center; }
+  .course .cta-center { justify-content: center; }
+  .course .cta-row :global(.btn) { font-size: 14px; padding: 14px 26px; gap: 8px; }
+  .course .cta-row :global(.btn--primary:hover) { background: var(--lead); border-color: var(--lead); }
+
+  /* sections */
+  .section { padding: var(--space-6) 0; }
+  .section--ink { background: var(--ink); color: var(--paper); }
+  .section--paper2 { background: var(--paper-2); border-top: var(--border); border-bottom: var(--border); }
+  .rule { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); border-top: var(--border); padding-top: var(--space-2); }
+  .rule span { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4em; color: var(--ink-60); white-space: nowrap; }
+  .lead-copy { font-family: var(--font-mono); font-size: 14px; line-height: 1.5; color: var(--ink-60); max-width: 640px; margin: 0 0 var(--space-4); }
+  .lead-copy strong { color: var(--lead); }
+
+  /* hero */
+  .hero { padding: var(--space-6) 0 var(--space-5); }
+  .hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: var(--space-5); align-items: center; }
+  .hero-h1 { font-family: var(--font-display); font-size: clamp(44px, 7.5vw, 104px); line-height: 0.9; letter-spacing: -0.01em; text-transform: lowercase; margin: var(--space-3) 0 var(--space-4); }
+  .hero-sub { font-family: var(--font-serif); font-style: italic; font-size: clamp(19px, 2.3vw, 26px); line-height: 1.34; max-width: 600px; margin-bottom: var(--space-4); }
+  .hero-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: var(--space-4); }
+  .deal { background: var(--paper); border: var(--border); box-shadow: 8px 8px 0 var(--lead); padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+  .deal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-3) var(--space-4); }
+  .deal-n { font-family: var(--font-display); font-size: 46px; line-height: 1; margin-bottom: 8px; }
+  .deal-l { font-family: var(--font-mono); font-size: 12px; line-height: 1.45; color: var(--ink-60); }
+
+  /* problem */
+  .prob-h2 { font-family: var(--font-display); font-size: clamp(34px, 5vw, 64px); line-height: 0.95; margin: var(--space-3) 0 var(--space-4); text-transform: lowercase; max-width: 18ch; color: var(--paper); }
+  .noise { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--space-3); margin-bottom: var(--space-5); }
+  .noise-row { display: flex; gap: 14px; align-items: flex-start; }
+  .noise-x { font-family: var(--font-mono); font-size: 13px; color: var(--gold); font-weight: 700; }
+  .noise-t { font-family: var(--font-mono); font-size: 14px; line-height: 1.5; color: var(--paper-soft); }
+  .vs { background: var(--paper); color: var(--ink); border: var(--border); }
+  .vs-head, .vs-row { display: grid; grid-template-columns: 1fr 1fr; }
+  .vs-head { border-bottom: var(--border); }
+  .vs-head > div { padding: 14px 20px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+  .vs-head .a { border-right: var(--border); color: var(--ink-60); }
+  .vs-head .b { color: var(--lead); }
+  .vs-row { border-bottom: 2px dashed var(--ink-30); }
+  .vs-row:last-child { border-bottom: none; }
+  .vs-row .a { padding: 16px 20px; border-right: 2px dashed var(--ink-30); font-family: var(--font-mono); font-size: 14px; line-height: 1.45; color: var(--ink-60); }
+  .vs-row .b { padding: 16px 20px; font-family: var(--font-mono); font-size: 14px; line-height: 1.45; font-weight: 700; }
+
+  /* roadmap */
+  .rm { position: relative; }
+  .rm-spine { position: absolute; left: 27px; top: 40px; bottom: 40px; width: 0; border-left: 2px dashed var(--ink-30); }
+  .rm-row { position: relative; display: grid; grid-template-columns: auto 1fr auto; gap: var(--space-3); align-items: center; padding: 16px 0; }
+  .rm-badge-wrap { position: relative; z-index: 1; background: var(--paper); padding: 4px 0; }
+  .rm-badge { width: 56px; height: 56px; display: inline-flex; align-items: center; justify-content: center; border: var(--border); font-family: var(--font-display); font-size: 30px; background: var(--ink); color: var(--paper); }
+  .rm-badge.build { background: var(--lead); }
+  .rm-badge.cap { background: var(--gold); color: var(--ink); }
+  .rm-title { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .rm-title h3 { font-family: var(--font-display); font-size: clamp(20px, 2.3vw, 28px); margin: 0; line-height: 1; text-transform: lowercase; }
+  .rm-sub { font-family: var(--font-serif); font-style: italic; font-size: 17px; line-height: 1.35; margin: 6px 0 0; color: var(--ink-60); }
+  .rm-time { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--ink-60); white-space: nowrap; }
+  .chip-lead, .chip-gold { display: inline-block; font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; padding: 5px 10px; border-radius: 2px; }
+  .chip-lead { background: var(--lead); color: var(--paper); }
+  .chip-gold { background: var(--gold); color: var(--ink); }
+
+  /* build */
+  .build-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--space-4); margin-bottom: var(--space-5); }
+  .bcard { background: var(--paper); border: var(--border); box-shadow: 8px 8px 0 var(--lead); padding: var(--space-4); }
+  .bcard .bn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: var(--border-thin); background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-weight: 700; font-size: 15px; margin-bottom: 16px; }
+  .bcard h3 { font-family: var(--font-display); font-size: 23px; margin: 0 0 10px; line-height: 1; text-transform: lowercase; }
+  .bcard p { font-family: var(--font-mono); font-size: 13.5px; line-height: 1.55; margin: 0; color: var(--ink-60); }
+  .cap-card { background: var(--ink); color: var(--paper); border: var(--border); box-shadow: 8px 8px 0 var(--gold); padding: var(--space-4); display: flex; gap: var(--space-4); flex-wrap: wrap; align-items: center; justify-content: space-between; }
+  .cap-card h3 { font-family: var(--font-display); font-size: clamp(26px, 3vw, 40px); margin: 12px 0 10px; line-height: 1; color: var(--paper); text-transform: lowercase; }
+  .cap-card p { font-family: var(--font-serif); font-style: italic; font-size: 20px; line-height: 1.4; margin: 0; color: var(--paper-soft); max-width: 620px; }
+  .cap-cta :global(.btn) { background: var(--gold); border-color: var(--gold); color: var(--ink); }
+  .cap-cta :global(.btn:hover) { background: var(--paper); border-color: var(--paper); color: var(--ink); }
+
+  /* thesis */
+  .thesis-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: var(--space-5); align-items: start; }
+  .thesis-fig { margin: var(--space-3) 0 0; }
+  .thesis-q { margin: 0; font-family: var(--font-serif); font-style: italic; font-size: clamp(24px, 3vw, 34px); line-height: 1.3; border-left: 5px solid var(--lead); padding-left: 22px; }
+  .thesis-cite { margin-top: 14px; padding-left: 27px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-60); }
+  .src-panel { background: var(--paper); border: var(--border); box-shadow: inset 0 2px 6px rgba(11,14,13,0.08); padding: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+  .src-panel p { font-family: var(--font-mono); font-size: 13px; line-height: 1.55; margin: 0; color: var(--ink-60); }
+  .src-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  /* faq */
+  .faq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4) var(--space-5); }
+  .faq-q { font-family: var(--font-mono); font-size: 15px; font-weight: 700; letter-spacing: 0.04em; margin: 0 0 8px; color: var(--lead); text-transform: lowercase; }
+  .faq-a { font-family: var(--font-mono); font-size: 14px; line-height: 1.55; margin: 0; color: var(--paper-soft); }
+
+  /* final cta */
+  .final { text-align: center; max-width: 820px; margin: 0 auto var(--space-5); }
+  .final-h2 { font-family: var(--font-display); font-size: clamp(36px, 6vw, 80px); line-height: 0.92; margin: var(--space-3) 0 var(--space-4); text-transform: lowercase; }
+  .final-sub { font-family: var(--font-serif); font-style: italic; font-size: 22px; line-height: 1.4; margin: 0 auto; max-width: 560px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-3); max-width: 980px; margin: 0 auto var(--space-5); }
+  .step { display: flex; gap: 14px; align-items: flex-start; }
+  .step .sn { width: 34px; height: 34px; flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center; border: var(--border-thin); background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-weight: 700; font-size: 13px; }
+  .step .sn.lead { background: var(--lead); }
+  .step-t { font-family: var(--font-mono); font-size: 13.5px; line-height: 1.5; }
+
+  @media (max-width: 1200px) { .hero-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 820px) { .thesis-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 640px) {
+    .vs-head, .vs-row { grid-template-columns: 1fr; }
+    .vs-head .a, .vs-row .a { border-right: none; }
+    .rm-time { display: none; }
+  }
+  @media (max-width: 540px) {
+    .container { padding: 0 var(--space-3); }
+    .cta-row { flex-direction: column; }
+    .cta-row :global(.btn) { width: 100%; justify-content: center; }
+    .deal { box-shadow: 4px 4px 0 var(--lead); }
+    .bcard { box-shadow: 4px 4px 0 var(--lead); }
+    .cap-card { box-shadow: 4px 4px 0 var(--gold); }
+    .rm-row { grid-template-columns: auto 1fr; }
+    .rm-time { display: none; }
+  }
+</style>
