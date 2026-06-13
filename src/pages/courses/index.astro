@@ -135,7 +135,7 @@ const courses = allCourses.sort((a, b) => {
     transition: box-shadow 0.15s ease, transform 0.15s ease;
   }
 
-  .course-card:hover {
+  .course-card:not(.course-card--muted):hover {
     box-shadow: 4px 4px 0 var(--card-accent, var(--blood));
     transform: translate(4px, 4px);
   }
