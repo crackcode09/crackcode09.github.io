@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # design reference files (local only)
 _design/
+
+# course drafts — private, local only
+docs/courses/drafts/
