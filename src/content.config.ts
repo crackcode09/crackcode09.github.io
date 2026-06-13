@@ -16,4 +16,21 @@ const writing = defineCollection({
   }),
 });
 
-export const collections = { writing };
+const courses = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.json', base: './src/content/courses' }),
+  schema: z.object({
+    title: z.string(),
+    slug: z.string(),
+    description: z.string(),
+    status: z.enum(['live', 'coming-soon', 'draft']),
+    label: z.string(),
+    accent: z.enum(['green', 'red', 'gold', 'default']),
+    modules: z.number(),
+    projects: z.number(),
+    duration: z.string(),
+    cost: z.string(),
+    repo: z.string().url(),
+  }),
+});
+
+export const collections = { writing, courses };
