@@ -1,0 +1,245 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allCourses = await getCollection('courses', ({ data }) => data.status !== 'draft');
+const courses = allCourses.sort((a, b) => {
+  const order = ['live', 'coming-soon'];
+  return order.indexOf(a.data.status) - order.indexOf(b.data.status);
+});
+---
+
+<Base
+  title="courses · nidhin"
+  description="Free, open-source courses for people who want to build real skills in AI, engineering, and systems thinking."
+>
+  <Header />
+
+  <main class="courses-page">
+    <div class="container">
+      <div class="page-header">
+        <h1 class="page-title">courses<span class="dot">.</span></h1>
+        <p class="page-sub">
+          Free, open-source learning paths. Each one is a real project — not just theory.
+        </p>
+      </div>
+
+      {courses.length === 0 ? (
+        <div class="empty">
+          <p class="empty-text">no courses yet.</p>
+          <p class="empty-sub">check back soon.</p>
+        </div>
+      ) : (
+        <ol class="courses-list" role="list">
+          {courses.map((course) => {
+            const isLive = course.data.status === 'live';
+            const accentVar = course.data.accent === 'green'
+              ? 'var(--signal)'
+              : course.data.accent === 'gold'
+              ? 'var(--gold)'
+              : 'var(--blood)';
+            return (
+              <li>
+                {isLive ? (
+                  <a href={`/courses/${course.data.slug}/`} class="course-card" style={`--card-accent: ${accentVar}`}>
+                    <div class="card-top">
+                      <span class="card-label">{course.data.label}</span>
+                      <span class="card-status live">live</span>
+                    </div>
+                    <h2 class="card-title">{course.data.title}</h2>
+                    <p class="card-desc">{course.data.description}</p>
+                    <div class="card-stats">
+                      <span>{course.data.modules} modules</span>
+                      <span>{course.data.projects} projects</span>
+                      <span>{course.data.duration}</span>
+                      <span>{course.data.cost} total</span>
+                    </div>
+                  </a>
+                ) : (
+                  <div class="course-card course-card--muted" style={`--card-accent: ${accentVar}`}>
+                    <div class="card-top">
+                      <span class="card-label">{course.data.label}</span>
+                      <span class="card-status soon">coming soon</span>
+                    </div>
+                    <h2 class="card-title">{course.data.title}</h2>
+                    <p class="card-desc">{course.data.description}</p>
+                  </div>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+      )}
+    </div>
+  </main>
+
+  <Footer />
+</Base>
+
+<style>
+  .container {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+
+  .courses-page {
+    padding: var(--space-6) 0 var(--space-7);
+  }
+
+  .page-header {
+    border-top: var(--border);
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 8vw, 72px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    margin-bottom: var(--space-3);
+  }
+
+  .dot { color: var(--blood); }
+
+  .page-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--ink-60);
+    max-width: 52ch;
+    line-height: 1.45;
+  }
+
+  .courses-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-4);
+  }
+
+  .course-card {
+    display: block;
+    background: var(--paper);
+    border: var(--border);
+    box-shadow: 8px 8px 0 var(--card-accent, var(--blood));
+    padding: var(--space-4);
+    text-decoration: none;
+    color: var(--ink);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+
+  .course-card:hover {
+    box-shadow: 4px 4px 0 var(--card-accent, var(--blood));
+    transform: translate(4px, 4px);
+  }
+
+  .course-card--muted {
+    opacity: 0.55;
+    cursor: default;
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-bottom: var(--space-3);
+    flex-wrap: wrap;
+  }
+
+  .card-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--ink-60);
+  }
+
+  .card-status {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 3px 8px;
+  }
+
+  .card-status.live {
+    background: var(--card-accent, var(--blood));
+    color: var(--paper);
+  }
+
+  .card-status.soon {
+    border: var(--border);
+    color: var(--ink-60);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 2.8vw, 32px);
+    line-height: 1;
+    text-transform: lowercase;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-2);
+  }
+
+  .card-desc {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-60);
+    margin: 0 0 var(--space-3);
+  }
+
+  .card-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .card-stats span {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-60);
+    background: var(--paper-2);
+    border: var(--border);
+    padding: 4px 10px;
+  }
+
+  .empty {
+    padding: var(--space-6) 0;
+    border-top: var(--border);
+  }
+
+  .empty-text {
+    font-family: var(--font-display);
+    font-size: 24px;
+    text-transform: lowercase;
+    margin-bottom: var(--space-2);
+  }
+
+  .empty-sub {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  @media (max-width: 540px) {
+    .courses-list { grid-template-columns: 1fr; }
+    .container { padding: 0 var(--space-3); }
+  }
+</style>
