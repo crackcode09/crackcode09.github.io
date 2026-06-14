@@ -28,8 +28,6 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
           <Chip variant="outline">{tag}</Chip>
           {readingTime && <span class="article-reading-time">{readingTime} min read</span>}
         </div>
-        <h1 class="article-title">{title}</h1>
-        <p class="article-excerpt">{excerpt}</p>
         <div class="article-divider"></div>
       </header>
 
@@ -62,7 +60,7 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
   }
 
   .article-header {
-    margin-bottom: var(--space-5);
+    margin-bottom: var(--space-4);
   }
 
   .article-meta {
@@ -89,33 +87,13 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     letter-spacing: 0.1em;
   }
 
-  .article-title {
-    font-family: var(--font-display);
-    font-size: clamp(28px, 5vw, 52px);
-    line-height: 1.0;
-    letter-spacing: -0.02em;
-    text-transform: lowercase;
-    text-wrap: balance;
-    margin-bottom: var(--space-3);
-  }
-
-  .article-excerpt {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(16px, 2vw, 20px);
-    line-height: 1.45;
-    color: var(--ink-60);
-    max-width: 52ch;
-  }
-
   .article-divider {
     height: 3px;
     background: var(--blood);
     width: 48px;
-    margin-top: var(--space-4);
   }
 
-  /* Article body — markdown content */
+  /* Article body */
   .article-body {
     font-family: var(--font-serif);
     font-size: 18px;
@@ -124,6 +102,18 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     margin-bottom: var(--space-6);
   }
 
+  /* Body h1 = visual display title */
+  .article-body :global(h1) {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 5vw, 56px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    text-transform: lowercase;
+    text-wrap: balance;
+    margin: var(--space-3) 0 var(--space-4);
+  }
+
+  /* h2 = section heading */
   .article-body :global(h2) {
     font-family: var(--font-display);
     font-size: clamp(20px, 3vw, 28px);
@@ -133,13 +123,29 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     line-height: 1.1;
   }
 
+  /* h3 = sub-section */
   .article-body :global(h3) {
     font-family: var(--font-mono);
-    font-size: 14px;
+    font-size: 13px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
     margin: var(--space-4) 0 var(--space-2);
     color: var(--ink-60);
+  }
+
+  /* Bold-only paragraphs = section eyebrow labels */
+  .article-body :global(p:has(> strong:only-child)) {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+    color: var(--ink-60);
+    margin-bottom: var(--space-1);
+  }
+
+  .article-body :global(p:has(> strong:only-child) strong) {
+    font-weight: 700;
   }
 
   .article-body :global(p) {
@@ -198,9 +204,7 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     text-underline-offset: 3px;
   }
 
-  .article-body :global(a:hover) {
-    color: var(--blood);
-  }
+  .article-body :global(a:hover) { color: var(--blood); }
 
   .article-body :global(hr) {
     border: none;
@@ -208,12 +212,16 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     margin: var(--space-5) 0;
   }
 
-  .article-body :global(strong) {
-    font-weight: 700;
-  }
+  .article-body :global(strong) { font-weight: 700; }
+  .article-body :global(em) { font-style: italic; }
 
-  .article-body :global(em) {
-    font-style: italic;
+  /* Footnotes */
+  .article-body :global(sub) {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-60);
+    vertical-align: baseline;
+    line-height: 1.6;
   }
 
   /* Subscribe aside */
@@ -232,13 +240,6 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     margin-bottom: var(--space-2);
   }
 
-  .beehiiv-embed {
-    border: none;
-    overflow: hidden;
-    width: 100%;
-    height: 52px;
-  }
-
   /* Back nav */
   .article-nav {
     padding-top: var(--space-3);
@@ -255,19 +256,14 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     text-decoration: none;
   }
 
-  .back-link:hover {
-    color: var(--blood);
-  }
+  .back-link:hover { color: var(--blood); }
 
   @media (max-width: 768px) {
-    .article-body {
-      font-size: 16px;
-    }
+    .article-body { font-size: 16px; }
+    .container { padding: 0 var(--space-2); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .back-link {
-      transition: none;
-    }
+    .back-link { transition: none; }
   }
 </style>
