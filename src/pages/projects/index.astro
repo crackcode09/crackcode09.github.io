@@ -1,0 +1,172 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Label from '../../components/Label.astro';
+import Chip from '../../components/Chip.astro';
+
+const allProjects = await getCollection('projects', ({ data }) => data.status !== 'draft');
+const projects = allProjects.sort((a, b) => {
+  const order = ['live', 'coming-soon'];
+  return order.indexOf(a.data.status) - order.indexOf(b.data.status);
+});
+
+const liftColors: Record<string, string> = {
+  red: 'var(--blood)',
+  green: 'var(--signal)',
+  gold: 'var(--gold)',
+  default: 'var(--ink)',
+};
+---
+
+<Base title="Selected Work — nidhy.dev">
+  <Header />
+  <main class="projects-page">
+    <div class="container">
+      <div class="page-header">
+        <Label accent="red">selected work</Label>
+        <h1 class="page-title">projects</h1>
+        <p class="page-sub">Real systems built for real problems. Manufacturing CI, quality engineering, and AI tools — measured by cost saved and scrap reduced.</p>
+      </div>
+      <div class="projects-grid">
+        {projects.map((p) => {
+          const accentColor = liftColors[p.data.lift] ?? liftColors.default;
+          const isMuted = p.data.status === 'coming-soon';
+
+          return isMuted ? (
+            <article
+              class="project-card project-card--muted"
+              style={`border-top: 3px solid ${accentColor}; --card-accent: ${accentColor}`}
+            >
+              <h2 class="project-name">{p.data.name}</h2>
+              <div class="project-tags">
+                {p.data.tags.map((t: string) => <Chip variant="outline">{t}</Chip>)}
+              </div>
+              <p class="project-blurb">{p.data.blurb}</p>
+              <span class="coming-soon-label">case study in progress</span>
+            </article>
+          ) : (
+            <a
+              href={p.data.href}
+              class="project-card"
+              style={`border-top: 3px solid ${accentColor}; --card-accent: ${accentColor}`}
+            >
+              <h2 class="project-name">{p.data.name}</h2>
+              <div class="project-tags">
+                {p.data.tags.map((t: string) => <Chip variant="outline">{t}</Chip>)}
+              </div>
+              <p class="project-blurb">{p.data.blurb}</p>
+              <span class="read-link">read case study →</span>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .projects-page {
+    min-height: 60vh;
+    padding: var(--space-6) 0;
+  }
+  .container {
+    max-width: var(--container-page);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
+  }
+  .page-header {
+    border-top: var(--border);
+    padding-top: var(--space-4);
+    margin-bottom: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 64ch;
+  }
+  .page-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 72px);
+    line-height: 0.9;
+    text-transform: lowercase;
+    margin: 0;
+  }
+  .page-sub {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(15px, 2vw, 18px);
+    line-height: 1.5;
+    color: var(--ink-60);
+    margin: 0;
+  }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-4);
+  }
+  .project-card {
+    background: var(--paper-2);
+    border: var(--border);
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .project-card:not(.project-card--muted):hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 12px 12px 0 var(--card-accent, var(--blood));
+  }
+  .project-card--muted {
+    opacity: 0.65;
+    cursor: default;
+  }
+  .project-name {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2vw, 24px);
+    line-height: 1.1;
+    text-transform: lowercase;
+    margin: 0;
+  }
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .project-blurb {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-60);
+    flex: 1;
+    margin: 0;
+  }
+  .coming-soon-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--ink-60);
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    border-top: 1px dashed var(--ink-60);
+    padding-top: 10px;
+  }
+  .read-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blood);
+    border-top: 1px solid var(--ink-12);
+    padding-top: 10px;
+  }
+
+  @media (max-width: 540px) {
+    .projects-grid { grid-template-columns: 1fr; }
+    .container { padding: 0 var(--space-2); }
+  }
+</style>

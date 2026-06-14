@@ -14,37 +14,15 @@ const recentPosts = allPosts
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 6);
 
-const projects = [
-  {
-    name: 'real-time spc system',
-    lift: 'red' as const,
-    tags: ['powerbi', 'sql', 'python'],
-    blurb: 'Built real-time Statistical Process Control dashboards for 3 production lines. Achieved $70–85K annual savings and 30–40% scrap reduction.',
-    type: 'article',
-    href: '#',
-    comingSoon: true,
-  },
-  {
-    name: 'digital inspection platform',
-    lift: 'green' as const,
-    tags: ['powerbi', 'automation', 'leadership'],
-    blurb: 'Coordinated 4 departments to design and deploy a digital quality inspection system serving 40+ users. Delivered $30K+ annual savings.',
-    type: 'article',
-    href: '#',
-    comingSoon: true,
-  },
-  {
-    name: 'process optimization suite',
-    lift: 'gold' as const,
-    tags: ['lean', 'dmaic', 'vsmapping'],
-    blurb: 'Led cross-functional Kaizen events and Value Stream Mapping initiatives. Reduced cycle time 15%, eliminated $90K in annual waste.',
-    type: 'article',
-    href: '#',
-    comingSoon: true,
-  },
-];
+const allProjects = await getCollection('projects', ({ data }) => data.featured && data.status !== 'draft');
+const featuredProjects = allProjects
+  .sort((a, b) => {
+    const order = ['live', 'coming-soon'];
+    return order.indexOf(a.data.status) - order.indexOf(b.data.status);
+  })
+  .slice(0, 3);
 
-const liftColors = { red: 'var(--blood)', green: 'var(--signal)', gold: 'var(--gold)' };
+const liftColors: Record<string, string> = { red: 'var(--blood)', green: 'var(--signal)', gold: 'var(--gold)', default: 'var(--ink)' };
 
 const social = [
   { label: 'github', href: 'https://github.com/crackcode09' },
@@ -93,22 +71,25 @@ const social = [
     <div class="container">
       <div class="section-rule"><span>selected work</span></div>
       <div class="projects-grid">
-        {projects.map((p) => (
-          <article class="project-card" style={`border-top: 3px solid ${liftColors[p.lift]}; --lift-color: ${liftColors[p.lift]}`}>
-            <h3 class="project-name">{p.name}</h3>
+        {featuredProjects.map((p) => (
+          <article class="project-card" style={`border-top: 3px solid ${liftColors[p.data.lift] ?? liftColors.default}; --lift-color: ${liftColors[p.data.lift] ?? liftColors.default}`}>
+            <h3 class="project-name">{p.data.name}</h3>
             <div class="project-tags">
-              {p.tags.map((t) => <Chip variant="outline">{t}</Chip>)}
+              {p.data.tags.map((t: string) => <Chip variant="outline">{t}</Chip>)}
             </div>
-            <p class="project-blurb">{p.blurb}</p>
-            {p.comingSoon ? (
+            <p class="project-blurb">{p.data.blurb}</p>
+            {p.data.status === 'coming-soon' ? (
               <span class="coming-soon">article in progress</span>
             ) : (
-              <Button href={p.href} variant="ghost" size="sm">
+              <Button href={p.data.href} variant="ghost" size="sm">
                 read case study →
               </Button>
             )}
           </article>
         ))}
+      </div>
+      <div class="all-projects">
+        <a href="/projects" class="all-projects-link">all projects →</a>
       </div>
     </div>
   </section>
@@ -316,6 +297,22 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
     padding-top: 10px;
     display: block;
   }
+
+  .all-projects { margin-top: var(--space-4); }
+  .all-projects-link {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    text-decoration: none;
+    border: var(--border);
+    padding: 10px 20px;
+    display: inline-block;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .all-projects-link:hover { background: var(--ink); color: var(--paper); }
 
   /* Writing section */
   .writing-heading {

@@ -16,6 +16,7 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
 ## Design Tokens
 
 Key tokens from `src/styles/tokens.css`:
+
 - `--blood` — brand red (primary accent)
 - `--signal` — green (course accent)
 - `--gold` — gold (capstone accent)
@@ -80,7 +81,17 @@ Each course JSON (`src/content/courses/[slug].json`) must match:
 
 ## Adding a New Writing Post
 
-Drop a `.md` file in `src/content/writing/`. Required frontmatter:
+### Your workflow
+
+1. **Draft locally** — create `docs/writing/drafts/[slug].md`
+   - Copy the template from `docs/writing/drafts/_template.md`
+   - **This folder is gitignored — stays local, never pushed to GitHub**
+
+2. **When ready** — create `src/content/writing/[slug].md` with frontmatter below
+
+3. **Set `published: true`** when you want it live
+
+### Frontmatter schema
 
 ```yaml
 ---
@@ -93,6 +104,45 @@ readingTime: 5     # optional, minutes
 featured: false    # optional, shows at top of list
 ---
 ```
+
+## Adding a New Project
+
+### Your workflow (4 steps)
+
+1. **Write a brief** — create `docs/projects/drafts/[slug].md`
+   - Copy the template from `docs/projects/drafts/_template.md`
+   - Fill in: name, lift color, tags, blurb, metrics, case study outline
+   - **This folder is gitignored — stays local, never pushed to GitHub**
+
+2. **Create the JSON** — `src/content/projects/[slug].json`
+   - Copy the JSON block from your draft
+   - Set `status: "live"` and `href` to the case study URL when ready
+
+3. **Review** — run `npm run dev`, check `/projects` and homepage
+
+4. **Commit and deploy**
+
+### Content collection schema
+
+Each project JSON (`src/content/projects/[slug].json`) must match:
+
+```json
+{
+  "name": "lowercase project name",
+  "slug": "url-safe-slug",
+  "lift": "red | green | gold | default",
+  "tags": ["tag1", "tag2"],
+  "blurb": "2-sentence max. What you built. Measured outcome.",
+  "href": "# or /writing/case-study-slug",
+  "status": "live | coming-soon | draft",
+  "featured": true
+}
+```
+
+- `featured: true` → shows on homepage (max 3 displayed)
+- `status: "draft"` → excluded from listing
+- `status: "coming-soon"` → muted non-linked card on `/projects`
+- Lift color guide: `red` = savings/fix, `green` = build/growth, `gold` = capstone/leadership
 
 ## Commands
 
