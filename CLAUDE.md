@@ -18,6 +18,18 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
   - `components/core/` — component specs (Button, Label, Chip, Panel, CodeBlock, Badge, Quote)
   - `brand/claude-design-brief.md` — paste-ready brief for any new Claude design task
 
+## Git Workflow
+
+**Always work on a feature branch — never commit directly to `dev` or `main`.**
+
+Branch naming:
+
+- `feature/` — new pages, components, or functionality
+- `fix/` — bug fixes
+- `content/` — writing posts, copy changes
+
+Flow: create branch → commit work → PR into `dev` → merge to `main` for deploy.
+
 ## Design Tokens
 
 Key tokens from `src/styles/tokens.css`:

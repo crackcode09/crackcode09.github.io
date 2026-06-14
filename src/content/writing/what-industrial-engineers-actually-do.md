@@ -86,21 +86,21 @@ You can't optimize what you don't understand, so every assignment starts with le
 
 ## good industrial engineering is invisible — that's the problem
 
-Here's the part that stings, and the reason I'm writing this at all.
+Here's the part that stings.
 
-When industrial engineering works, the most visible outcome is the absence of a problem. No crisis to contain. No launch event. The line runs, costs fall, and the failure mode that was trending toward a stoppage simply stops trending. Our best work produces a silence — and silence is difficult to point to.
+When the work goes right, you can't show anyone. No launch, no ribbon cutting, no incident. The line just runs. Costs fall. The thing that was about to break doesn't. Our best days produce a silence — and silence is impossible to put on a slide.
 
-The consequence is a crediting problem. Organizations recognize what they can see, and prevention doesn't photograph well. Credit distributes naturally across the system — to the team, the manager, a strong quarter — and that's appropriate, because a well-functioning system benefits everyone who touches it. The engineer who restructured that system tends to hold the quietest line on the attribution list.
+Credit tends to diffuse. A working system benefits everyone who touches it, and that's as it should be. The engineer who rebuilt the system tends to disappear into the result.
 
-It gets worse after the hire. Plenty of companies bring on an industrial engineer without a clear picture of what one actually does — so they can't connect the problems they already have to the person they just hired. The real issues never get translated into work the IE is pointed at. So we get slotted into the narrowest version of the role — the time-study person, the Excel person, the one who runs the audit — and the systems thinking goes to waste. They hire a generalist who can see the whole machine, then ask them to tighten one bolt.
+The hiring piece makes it worse. Most companies don't know exactly what an IE does, so when they bring one in, they can't connect the real problems to the person who could fix them. We get handed the narrowest version of the job instead: the time studies, the audit checklists, the Excel sheets nobody else wanted. They hire someone trained to see the whole system and ask them to watch one corner of it.
 
-None of this is for lack of demand. The U.S. Bureau of Labor Statistics counts roughly 351,000 industrial engineers as of 2024, and projects the field to grow 11 percent through 2034 — much faster than the average job, at a median wage north of a hundred grand. The shortage isn't of work, or of us. It's of people who know what to do with us once we're in the building.
+This isn't a niche problem. The BLS counted roughly 351,000 industrial engineers in the U.S. as of 2024, with 11% growth projected through 2034 — well above average, median wage over a hundred grand. There's no shortage of work, or of us. There's a shortage of people who know what to do with us after the hire.
 
-And our value is counterfactual, which is a brutal thing to sell. "We saved two million" is easy. "We avoided spending two million we were about to waste" is the truth, and it never lands as hard. Prevention doesn't photograph well.
+The thing that makes this hard to fix: our value is counterfactual. "We saved two million" is easy. "We avoided spending two million we were about to waste" is the truth, and it never lands as hard. You can't photograph prevention.
 
 ---
 
-The work speaks for itself — but only once someone translates it. Most people's picture of industrial engineering stopped updating somewhere around the stopwatch, and the gap between that picture and the real job is wide enough to drive a forklift through. Closing it is the work I'm taking on here.
+Most people's picture of industrial engineering is a guy with a stopwatch on a factory floor. That picture is about a hundred years old. This is my attempt to update it — through actual work, actual numbers, shown in the open.
 
 So that's what this is: field notes from inside the field. Real projects, real before-and-afters, real numbers, shown in the open. Not a pitch — a record of the work as it happens.
 
