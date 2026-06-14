@@ -18,7 +18,7 @@ const { title, date, tag, excerpt, readingTime, coverImage } = Astro.props;
 const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
 ---
 
-<Base title={title} description={excerpt} image={coverImage}>
+<Base title={title} description={excerpt} image={coverImage} author="Nidhin Dileepkumar" publishedTime={date.toISOString()}>
   <Header />
 
   <article class="article-page">

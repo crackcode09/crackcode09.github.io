@@ -34,10 +34,12 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
 2. Commit changes to feature branch
 3. Open PR targeting `dev` — CI runs build check
 4. Once CI passes, merge PR into `dev`
-5. Open PR from `dev` → `main` with auto-merge: `gh pr merge --auto --squash`
+5. Open PR from `dev` → `main` with auto-merge using regular merge (NOT squash): `gh pr merge --auto --merge`
 6. CI passes → auto-merges to `main` → GitHub Pages deploys automatically
 
 **No manual touching of `main` ever.** CI/auto-merge handles it.
+
+> **Why regular merge for dev→main:** Squash merges rewrite commit SHAs, causing history divergence between `dev` and `main`. Each subsequent dev→main PR then has conflicts even when content is identical. Regular merge preserves the commit graph and avoids this permanently.
 
 ## Design Tokens
 
