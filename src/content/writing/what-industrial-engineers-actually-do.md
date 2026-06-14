@@ -2,7 +2,7 @@
 title: "What Industrial Engineers Actually Do"
 date: 2026-06-14
 tag: "ie"
-excerpt: "Everyone thinks IE means factories or HR. It means making broken systems work. And that skill transfers to everything."
+excerpt: "I optimize things for a living. Almost nobody — including the people who hire us — can tell you what that means. So let me."
 published: true
 readingTime: 6
 featured: true
