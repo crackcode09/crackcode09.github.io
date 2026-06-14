@@ -29,5 +29,6 @@ _design/
 # docs — local only, never pushed
 docs/
 
-# playwright screenshots — local only
+# playwright — local only
 _playwright/
+.playwright-mcp/
