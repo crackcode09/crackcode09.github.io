@@ -33,4 +33,18 @@ const courses = defineCollection({
   }),
 });
 
-export const collections = { writing, courses };
+const projects = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.json', base: './src/content/projects' }),
+  schema: z.object({
+    name: z.string(),
+    slug: z.string(),
+    lift: z.enum(['red', 'green', 'gold', 'default']),
+    tags: z.array(z.string()),
+    blurb: z.string(),
+    href: z.string(),
+    status: z.enum(['live', 'coming-soon', 'draft']),
+    featured: z.boolean().default(false),
+  }),
+});
+
+export const collections = { writing, courses, projects };
