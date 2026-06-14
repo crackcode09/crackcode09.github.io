@@ -28,3 +28,7 @@ _design/
 
 # docs — local only, never pushed
 docs/
+
+# playwright — local only
+_playwright/
+.playwright-mcp/

@@ -11,7 +11,12 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
 - **Content:** Astro Content Layer API (`src/content.config.ts`)
 - **Styling:** Scoped CSS with design tokens in `src/styles/tokens.css`
 - **Components:** `src/components/` — Header, Footer, Base (layout), Label, Button, Chip, CodeBlock, Badge, Panel
-- **Fonts:** Loaded in Base.astro — display (Departure Mono), serif (Lora), mono (JetBrains Mono)
+- **Fonts:** Loaded in Base.astro via Google Fonts — display (Major Mono Display), serif (Fraunces), mono (Space Mono)
+- **Design system:** `D:\nidhin.dev\content\brand\Nidhin Design System\` — canonical source of truth
+  - `guidelines/design-kit.html` — visual reference (self-contained)
+  - `tokens/` — colors, typography, shape, spacing token files
+  - `components/core/` — component specs (Button, Label, Chip, Panel, CodeBlock, Badge, Quote)
+  - `brand/claude-design-brief.md` — paste-ready brief for any new Claude design task
 
 ## Design Tokens
 
@@ -122,7 +127,7 @@ featured: false    # optional, shows at top of list
 
 4. **Commit and deploy**
 
-### Content collection schema
+### Project JSON schema
 
 Each project JSON (`src/content/projects/[slug].json`) must match:
 
