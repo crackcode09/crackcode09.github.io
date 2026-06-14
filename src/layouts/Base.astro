@@ -2,12 +2,18 @@
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
 }
 
 const {
   title = 'nidhin dileepkumar',
   description = 'systems engineer · web builder · lean six sigma · ai. building in the open.',
+  image = '/og/default.png',
 } = Astro.props;
+
+const site = 'https://nidhy.dev';
+const ogImage = new URL(image, site).href;
+const ogUrl = new URL(Astro.url.pathname, site).href;
 ---
 
 <!doctype html>
@@ -16,6 +22,16 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="nidhy.dev" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:url" content={ogUrl} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <meta http-equiv="X-Content-Type-Options" content="nosniff" />
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta

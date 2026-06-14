@@ -10,14 +10,15 @@ interface Props {
   tag: string;
   excerpt: string;
   readingTime?: number;
+  coverImage?: string;
 }
 
-const { title, date, tag, excerpt, readingTime } = Astro.props;
+const { title, date, tag, excerpt, readingTime, coverImage } = Astro.props;
 
 const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
 ---
 
-<Base title={title} description={excerpt}>
+<Base title={title} description={excerpt} image={coverImage}>
   <Header />
 
   <article class="article-page">
