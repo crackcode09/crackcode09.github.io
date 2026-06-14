@@ -6,6 +6,7 @@ excerpt: "I optimize things for a living. Almost nobody — including the people
 published: true
 readingTime: 6
 featured: true
+coverImage: "/og/ie-article.png"
 ---
 
 **FIELD NOTES / 001**
