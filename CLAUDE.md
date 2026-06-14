@@ -20,15 +20,24 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
 
 ## Git Workflow
 
-**Always work on a feature branch — never commit directly to `dev` or `main`.**
+**Never commit directly to `dev` or `main`.** Always use a feature branch.
 
-Branch naming:
+### Branch naming
 
 - `feature/` — new pages, components, or functionality
 - `fix/` — bug fixes
 - `content/` — writing posts, copy changes
 
-Flow: create branch → commit work → PR into `dev` → merge to `main` for deploy.
+### Full flow
+
+1. Create feature branch off `dev`
+2. Commit changes to feature branch
+3. Open PR targeting `dev` — CI runs build check
+4. Once CI passes, merge PR into `dev`
+5. Open PR from `dev` → `main` with auto-merge: `gh pr merge --auto --squash`
+6. CI passes → auto-merges to `main` → GitHub Pages deploys automatically
+
+**No manual touching of `main` ever.** CI/auto-merge handles it.
 
 ## Design Tokens
 
