@@ -32,3 +32,6 @@ docs/
 # playwright — local only
 _playwright/
 .playwright-mcp/
+
+# OG image generator templates — local only
+public/og/_*.html
