@@ -88,9 +88,9 @@ You can't optimize what you don't understand, so every assignment starts with le
 
 Here's the part that stings, and the reason I'm writing this at all.
 
-When industrial engineering works, nothing happens. No fire. No launch. No demo. The line just runs. Costs quietly drop. The defect that used to surface every Tuesday stops surfacing. Our best work is the *absence* of a problem — and you can't point at an absence.
+When industrial engineering works, the most visible outcome is the absence of a problem. No crisis to contain. No launch event. The line runs, costs fall, and the failure mode that was trending toward a stoppage simply stops trending. Our best work produces a silence — and silence is difficult to point to.
 
-So the credit spreads out — to the manager, to the team, to a good quarter. Everyone shares in a system that runs well, and that's how it should be. The engineer who reshaped that system just tends to be the quietest name on the list.
+The consequence is a crediting problem. Organizations recognize what they can see, and prevention doesn't photograph well. Credit distributes naturally across the system — to the team, the manager, a strong quarter — and that's appropriate, because a well-functioning system benefits everyone who touches it. The engineer who restructured that system tends to hold the quietest line on the attribution list.
 
 It gets worse after the hire. Plenty of companies bring on an industrial engineer without a clear picture of what one actually does — so they can't connect the problems they already have to the person they just hired. The real issues never get translated into work the IE is pointed at. So we get slotted into the narrowest version of the role — the time-study person, the Excel person, the one who runs the audit — and the systems thinking goes to waste. They hire a generalist who can see the whole machine, then ask them to tighten one bolt.
 
