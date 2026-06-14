@@ -28,3 +28,6 @@ _design/
 
 # docs — local only, never pushed
 docs/
+
+# playwright screenshots — local only
+_playwright/

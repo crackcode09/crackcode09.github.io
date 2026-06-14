@@ -2,15 +2,16 @@
 interface Props {
   size?: number;
   onInk?: boolean;
+  loading?: 'eager' | 'lazy';
 }
-const { size = 24, onInk = false } = Astro.props;
+const { size = 24, onInk = false, loading = 'eager' } = Astro.props;
 const iconSize = Math.round(size * 0.85);
 ---
 <span
   class="wordmark"
   style={`color: ${onInk ? 'var(--paper)' : 'var(--ink)'}`}
 >
-  <img src="/favicon.svg" alt="" width={iconSize} height={iconSize} class="wordmark-icon" loading="eager" />
+  <img src="/favicon.svg" alt="" width={iconSize} height={iconSize} class="wordmark-icon" loading={loading} />
   <span class="wordmark-text" style={`font-size: ${size}px`}>nidhy<span class="dot">.</span>dev</span>
 </span>
 <style>

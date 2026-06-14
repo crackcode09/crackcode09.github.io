@@ -9,7 +9,7 @@ const social = [
 ---
 <footer>
   <div class="footer-inner">
-    <Wordmark size={22} />
+    <Wordmark size={22} loading="lazy" />
     <div class="social">
       {social.map(({ label, href }) => {
         const isExternal = !href.startsWith('mailto:');
