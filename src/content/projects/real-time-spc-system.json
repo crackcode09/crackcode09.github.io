@@ -1,0 +1,10 @@
+{
+  "name": "real-time spc system",
+  "slug": "real-time-spc-system",
+  "lift": "red",
+  "tags": ["powerbi", "sql", "python"],
+  "blurb": "Built real-time Statistical Process Control dashboards for 3 production lines. Achieved $70–85K annual savings and 30–40% scrap reduction.",
+  "href": "#",
+  "status": "coming-soon",
+  "featured": true
+}
