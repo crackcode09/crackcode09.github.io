@@ -1,4 +1,6 @@
 ---
+import { Font } from 'astro:assets';
+
 interface Props {
   title?: string;
   description?: string;
@@ -42,7 +44,7 @@ const ogUrl = new URL(Astro.url.pathname, site).href;
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://subscribe-forms.beehiiv.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; frame-src https://embeds.beehiiv.com https://subscribe-forms.beehiiv.com; connect-src https://subscribe-forms.beehiiv.com https://api.beehiiv.com; img-src 'self' data: https://*.beehiiv.com;"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://subscribe-forms.beehiiv.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src https://embeds.beehiiv.com https://subscribe-forms.beehiiv.com; connect-src https://subscribe-forms.beehiiv.com https://api.beehiiv.com; img-src 'self' data: https://*.beehiiv.com;"
     />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -51,16 +53,32 @@ const ogUrl = new URL(Astro.url.pathname, site).href;
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <meta name="theme-color" content="#0b0e0d" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap"
-      rel="stylesheet"
-    />
+    <!-- preload what the first screen needs; italic and serif files load on demand -->
+    <Font cssVariable="--font-display" preload />
+    <Font cssVariable="--font-mono" preload={[{ style: 'normal' }]} />
+    <Font cssVariable="--font-serif" />
   </head>
   <body>
     <a class="skip-link" href="#work">skip to content</a>
     <slot />
+    <script>
+      // Smooth-scroll only for links to a section on the current page. Arriving from
+      // another page (e.g. /writing/ → /#about) jumps straight there, with no visible
+      // scroll through the whole page. Reduced motion always jumps.
+      document.addEventListener('click', (event) => {
+        if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        const link = (event.target as Element).closest('a[href*="#"]') as HTMLAnchorElement | null;
+        if (!link || link.classList.contains('skip-link')) return;
+        const url = new URL(link.href);
+        if (url.origin !== location.origin || url.pathname !== location.pathname || !url.hash) return;
+        const target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
+        if (!target) return;
+        event.preventDefault();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+        history.pushState(null, '', url.hash);
+      });
+    </script>
   </body>
 </html>
 
@@ -69,9 +87,23 @@ const ogUrl = new URL(Astro.url.pathname, site).href;
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  /* reserve the scrollbar's space on every page, so short pages (no scrollbar) and
+     long pages line up and nothing jumps sideways between them */
+  html { overflow-x: hidden; scrollbar-gutter: stable; }
 
-  html { overflow-x: hidden; }
+
+  /* cross-fade between pages; header and footer stay put. Browsers without
+     support load pages as before. */
+  @view-transition { navigation: auto; }
+  header { view-transition-name: site-header; }
+  footer { view-transition-name: site-footer; }
+  ::view-transition-old(root),
+  ::view-transition-new(root) { animation-duration: 0.2s; }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(*),
+    ::view-transition-old(*),
+    ::view-transition-new(*) { animation: none !important; }
+  }
 
   body {
     background: var(--paper);
@@ -80,7 +112,13 @@ const ogUrl = new URL(Astro.url.pathname, site).href;
     min-height: 100vh;
     position: relative;
     overflow-x: hidden;
+    /* column layout so the footer sits at the bottom of short pages */
+    display: flex;
+    flex-direction: column;
   }
+  /* sections keep their own max-width + auto margins; full width by default */
+  body > :not(.skip-link) { width: 100%; }
+  body > footer { margin-top: auto; }
 
   button:focus, a:focus { outline: 3px solid var(--blood); outline-offset: 2px; }
   input:focus { outline: 3px solid var(--ink); outline-offset: 2px; }

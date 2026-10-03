@@ -72,7 +72,7 @@ const posts = [...featured, ...rest];
   }
 
   .writing-page {
-    padding: var(--space-6) 0 var(--space-7);
+    padding: var(--space-5) 0 var(--space-6);
   }
 
   .page-header {
@@ -115,9 +115,9 @@ const posts = [...featured, ...rest];
     border-bottom: var(--border);
   }
 
-  .post-item--featured .post-link {
-    border-left: 3px solid var(--blood);
-    padding-left: var(--space-3);
+  /* featured: the post's top rule turns red (with the red "featured" badge) */
+  .post-item--featured {
+    border-top-color: var(--blood);
   }
 
   .post-link {
@@ -157,7 +157,7 @@ const posts = [...featured, ...rest];
     font-size: 10px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--ink-60);
+    color: var(--ink-70);
     background: var(--paper-2);
     border: var(--border);
     padding: 2px 8px;
@@ -222,12 +222,12 @@ const posts = [...featured, ...rest];
 
   @media (max-width: 768px) {
     .container { padding: 0 var(--space-3); }
-    .writing-page { padding: var(--space-5) 0 var(--space-6); }
+    .writing-page { padding: var(--space-4) 0 var(--space-5); }
   }
 
   @media (max-width: 540px) {
     .container { padding: 0 var(--space-2); }
-    .writing-page { padding: var(--space-4) 0 var(--space-5); }
+    .writing-page { padding: var(--space-3) 0 var(--space-4); }
     .post-link { padding: var(--space-3) 0; }
     .post-meta { gap: var(--space-2); }
     .post-title { font-size: clamp(18px, 5vw, 24px); }
