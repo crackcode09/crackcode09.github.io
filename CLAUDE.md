@@ -46,8 +46,8 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
 Key tokens from `src/styles/tokens.css`:
 
 - `--blood` — brand red (primary accent)
-- `--signal` — green (course accent)
-- `--gold` — gold (capstone accent)
+- `--signal` — green (secondary accent)
+- `--gold` — gold (tertiary accent)
 - `--ink`, `--ink-60`, `--ink-30`, `--ink-12` — text hierarchy
 - `--paper`, `--paper-2`, `--paper-soft` — background hierarchy
 - `--border` — `2px solid var(--ink)` (hard border, no radius)
@@ -55,57 +55,6 @@ Key tokens from `src/styles/tokens.css`:
 - `--space-1` through `--space-7` — spacing scale
 
 Card shadow style: `box-shadow: 8px 8px 0 var(--accent)` — hard offset, no blur.
-
-## Adding a New Course
-
-### Your workflow (5 steps)
-
-1. **Write a brief** — create `docs/courses/drafts/[course-slug].md`
-   - Copy the template from `docs/courses/drafts/_template.md`
-   - Fill in: title, audience, modules, projects, stats, repo URL, accent color, selling points
-   - **This folder is gitignored — drafts stay local, never pushed to GitHub**
-
-2. **Open a Claude session** and say:
-   > "Build the course page for `docs/courses/drafts/[course-slug].md`"
-
-3. **Claude will:**
-   - Read the draft
-   - Create `src/content/courses/[slug].json` (metadata — listing card auto-updates)
-   - Create `src/pages/courses/[slug].astro` (full bespoke landing page)
-
-4. **Review** — run `npm run dev`, check `/courses` and `/courses/[slug]`
-
-5. **Commit and deploy**
-
-### What Claude follows when building a course page
-
-- Use `src/pages/courses/zero-to-ai.astro` as the structural reference
-- Import path convention: `../../layouts/Base.astro`, `../../components/Header.astro`, etc.
-- Accent color maps: `green → var(--signal)`, `red → var(--blood)`, `gold → var(--gold)`
-- All CSS is page-scoped — no global style changes
-- Match the hard-offset-shadow card language and mono/serif/display font hierarchy
-
-### Content collection schema
-
-Each course JSON (`src/content/courses/[slug].json`) must match:
-
-```json
-{
-  "title": "string",
-  "slug": "string (matches filename)",
-  "description": "string (used on listing card)",
-  "status": "live | coming-soon | draft",
-  "label": "string (small badge text)",
-  "accent": "green | red | gold | default",
-  "modules": 0,
-  "projects": 0,
-  "duration": "string e.g. 8–16 weeks",
-  "cost": "string e.g. $5 or free",
-  "repo": "https://github.com/..."
-}
-```
-
-`draft` status courses are excluded from the listing. `coming-soon` shows as a muted non-linked card.
 
 ## Adding a New Writing Post
 

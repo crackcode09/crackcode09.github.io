@@ -29,7 +29,6 @@ share the work.
 | Section | What you'll find |
 | --- | --- |
 | **selected work** | Process engineering and data projects — real outcomes, real numbers |
-| **courses** | Structured learning paths built in public |
 | **field notes** | Writing on lean, systems, AI, and building |
 | **about** | Stack, background, and how to reach me |
 
@@ -54,12 +53,10 @@ src/
 ├── components/        # Header, Footer, Base, Label, Button, Chip, Panel, CodeBlock, Badge
 ├── content/
 │   ├── writing/       # Blog posts (.md with frontmatter)
-│   ├── courses/       # Course metadata (.json)
 │   └── projects/      # Project cards (.json)
 ├── pages/
 │   ├── index.astro    # Homepage — hero, work, field notes, about
 │   ├── writing/       # Listing + individual article pages
-│   ├── courses/       # Listing + bespoke landing pages
 │   └── projects/      # Full projects listing
 └── styles/
     └── tokens.css     # Design tokens — colors, spacing, type scale
@@ -95,28 +92,6 @@ readingTime: 5
 featured: false
 ---
 ```
-
-### course
-
-Create `src/content/courses/[slug].json`:
-
-```json
-{
-  "title": "Course title",
-  "slug": "url-safe-slug",
-  "description": "Shown on listing card.",
-  "status": "live | coming-soon | draft",
-  "label": "badge text",
-  "accent": "green | red | gold | default",
-  "modules": 8,
-  "projects": 3,
-  "duration": "8–16 weeks",
-  "cost": "$5",
-  "repo": "https://github.com/..."
-}
-```
-
-Then create `src/pages/courses/[slug].astro` using `zero-to-ai.astro` as the structural template.
 
 ### project
 
