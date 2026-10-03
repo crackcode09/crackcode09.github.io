@@ -1,0 +1,19 @@
+# Weekly update PRs for npm packages and GitHub Actions, opened against dev
+# (all changes reach main through a dev → main PR).
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      astro:
+        patterns: ["astro", "@astrojs/*"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    target-branch: dev
+    schedule:
+      interval: weekly

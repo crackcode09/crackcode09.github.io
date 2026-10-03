@@ -3,11 +3,11 @@
 ## Project
 
 Personal website for Nidhin Dileepkumar at [nidhy.dev](https://nidhy.dev).
-Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/crackcode09.github.io`.
+Built with Astro 7, static output, deployed via GitHub Pages from `crackcode09/crackcode09.github.io`.
 
 ## Tech Stack
 
-- **Framework:** Astro 6 (static, no SSR)
+- **Framework:** Astro 7 (static, no SSR)
 - **Content:** Astro Content Layer API (`src/content.config.ts`)
 - **Styling:** Scoped CSS with design tokens in `src/styles/tokens.css`
 - **Components:** `src/components/` — Header, Footer, Base (layout), Label, Button, Chip, CodeBlock, Badge, Panel
@@ -38,6 +38,13 @@ Built with Astro 6, static output, deployed via GitHub Pages from `crackcode09/c
 6. CI passes → auto-merges to `main` → GitHub Pages deploys automatically
 
 **No manual touching of `main` ever.** CI/auto-merge handles it.
+
+### CI/CD security
+
+- Workflow actions are pinned to full commit SHAs with the version in a comment. Update them through Dependabot PRs, never back to a floating tag.
+- `ci.yml` runs on pushes to `dev` and on PRs into `dev` and `main`, with a read-only token. It runs `npm audit --audit-level=critical` before the build.
+- `deploy.yml` gives `pages: write` and `id-token: write` to the deploy job only.
+- Dependabot (`.github/dependabot.yml`) opens weekly npm and Actions update PRs against `dev`.
 
 > **Why `--merge` not `--squash` for dev→main:** Squash rewrites commit SHAs, causing history divergence. Every subsequent dev→main PR then conflicts even with identical content. Regular merge preserves the commit graph permanently.
 

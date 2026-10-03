@@ -38,7 +38,7 @@ share the work.
 
 | Layer | Tech |
 | --- | --- |
-| Framework | Astro 6 — static output, no SSR |
+| Framework | Astro 7 — static output, no SSR |
 | Content | Astro Content Layer API |
 | Styling | Scoped CSS + design tokens (`src/styles/tokens.css`) |
 | Fonts | Major Mono Display · Fraunces · Space Mono |
