@@ -1,17 +1,18 @@
 ---
 import Wordmark from './Wordmark.astro';
+import Icon from './Icon.astro';
 const year = new Date().getFullYear();
 const social = [
-  { label: 'github', href: 'https://github.com/crackcode09' },
-  { label: 'linkedin', href: 'https://www.linkedin.com/in/dnidhin97/' },
-  { label: 'email', href: 'mailto:hello@nidhy.dev' },
-];
+  { label: 'github', icon: 'github', href: 'https://github.com/crackcode09' },
+  { label: 'linkedin', icon: 'linkedin', href: 'https://www.linkedin.com/in/dnidhin97/' },
+  { label: 'email', icon: 'envelope', href: 'mailto:hello@nidhy.dev' },
+] as const;
 ---
 <footer>
   <div class="footer-inner">
     <Wordmark size={22} loading="lazy" />
     <div class="social">
-      {social.map(({ label, href }) => {
+      {social.map(({ label, icon, href }) => {
         const isExternal = !href.startsWith('mailto:');
         return (
           <a
@@ -19,12 +20,12 @@ const social = [
             aria-label={label}
             {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           >
-            {label} →
+            <Icon name={icon} size={18} />{label} →
           </a>
         );
       })}
     </div>
-    <span class="copy">© {year} · nidhin dileepkumar</span>
+    <span class="copy">© {year} · nidhin dileepkumar · built with AI</span>
   </div>
 </footer>
 <style>
@@ -41,6 +42,9 @@ const social = [
   }
   .social { display: flex; gap: var(--space-3); flex-wrap: wrap; }
   .social a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: var(--font-mono);
     font-size: 12px;
     font-weight: 700;
