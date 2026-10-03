@@ -14,7 +14,7 @@
 
 ---
 
-Four years in manufacturing CI. SPC dashboards that cut **$70–85K in annual scrap**. Quality inspection systems serving 40+ users across 4 departments. Building it all in the open, one commit at a time.
+5+ years across quality, manufacturing and operations. SPC dashboards that cut **$70–85K in annual scrap**. Quality inspection systems serving 40+ users across 4 departments. Building it all in the open, one commit at a time.
 
 ```text
 build systems.

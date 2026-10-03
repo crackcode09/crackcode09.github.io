@@ -5,8 +5,7 @@ import Footer from '../components/Footer.astro';
 import Label from '../components/Label.astro';
 import Button from '../components/Button.astro';
 import Chip from '../components/Chip.astro';
-import Panel from '../components/Panel.astro';
-import CodeBlock from '../components/CodeBlock.astro';
+import Icon from '../components/Icon.astro';
 import { getCollection } from 'astro:content';
 
 const allPosts = await getCollection('writing');
@@ -132,51 +131,71 @@ const social = [
   <section id="about" class="section">
     <div class="container">
       <div class="section-rule"><span>about</span></div>
-      <div class="about-grid">
-        <div class="about-left">
-          <p class="about-bio">
-            I'm Nidhin — industrial engineer, systems thinker, AI builder. I fix broken processes
-            and build the tools to prove it. Four years in manufacturing CI; building in the open
-            at night. I use AI to build faster and I share everything publicly.
-          </p>
-          <blockquote class="about-quote">
-            "Every broken process is a signal the system is speaking. Listen, measure, fix the root — not the symptom."
-          </blockquote>
-          <div class="about-subsection">
-            <p class="about-subsection-label">outside the work</p>
-            <p class="about-outside">
-              Travel · photography · gaming. Currently adding gym and swimming to the rotation. Staying curious is the default.
-            </p>
+      <div class="spec">
+        <div class="spec-photo">
+          <div class="photo">
+            <img src="/images/about/nidhin-square-800.jpg" alt="Nidhin smiling in the cockpit of a small plane, wearing a headset and sunglasses" width="800" height="800" loading="lazy" decoding="async" />
           </div>
-          <div class="about-subsection">
-            <p class="about-subsection-label">open to</p>
-            <div class="about-chips">
-              <Chip variant="outline">collabs</Chip>
-              <Chip variant="outline">consulting</Chip>
-              <Chip variant="outline">talks</Chip>
-              <Chip variant="outline">open source</Chip>
-            </div>
-            <p class="about-contact">
-              reach out → <a href="mailto:hello@nidhy.dev" class="about-email">hello@nidhy.dev</a>
-            </p>
-          </div>
+          <span class="callout callout--1"><i>01</i> thinks in systems</span>
+          <span class="callout callout--2"><i>02</i> fixes the root</span>
+          <span class="callout callout--3"><i>03</i> ships in public</span>
         </div>
-        <div class="about-right">
-          <Panel sunken>
-            <Label accent="muted">systems &amp; data</Label>
-            <CodeBlock label="stack.toml">{`lean    = "Six Sigma, DMAIC, VSM, 5S"
-data    = "Power BI, SQL, Python, Minitab"
-quality = "SPC, FMEA, Control Plans"
-ai_data = "OpenAI, Claude, Ollama"`}</CodeBlock>
-          </Panel>
-          <Panel sunken>
-            <Label accent="muted">web &amp; build</Label>
-            <CodeBlock label="web.toml">{`frontend = "React, Next.js, HTMX, JS"
-backend  = "Node.js, Express, Python"
-data_viz = "Chart.js, Power BI"
-platform = "Supabase, Sanity, EJS"
-build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
-          </Panel>
+
+        <div class="spec-info">
+          <span class="spec-label">spec sheet · rev. 2026</span>
+          <h2 class="spec-headline">root cause<span class="dot">:</span><br />curiosity<span class="dot">.</span></h2>
+          <p class="spec-tagline">continuous improvement, continuously deployed.</p>
+          <p class="spec-bio">
+            <strong>Hi, I'm Nidhin. Welcome to nidhy.dev.</strong>
+            I work where quality, manufacturing and operations meet, and lately IT operations too.
+            For 5+ years I've been finding the bottleneck, measuring it, and building the tool that
+            keeps it fixed. At night I build in the open and write it up as field notes.
+          </p>
+          <a class="spec-status" href="/writing/"><span class="status-dot" aria-hidden="true"></span><b>status</b>writing field notes about my career →</a>
+
+          <table class="spec-table">
+            <tr><th scope="row">role</th><td>Industrial engineer · quality · manufacturing · operations · IT operations</td></tr>
+            <tr><th scope="row">toolkit</th><td>Six Sigma · DMAIC · VSM · 5S · SPC · FMEA · Power BI · Minitab · Claude · Ollama</td></tr>
+            <tr><th scope="row">stack</th><td>
+              <ul class="icon-list">
+                <li><Icon name="filetype-html" />HTML</li>
+                <li><Icon name="code-slash" />HTMX</li>
+                <li><Icon name="filetype-css" />CSS</li>
+                <li><Icon name="javascript" />JavaScript</li>
+                <li><Icon name="filetype-py" />Python</li>
+                <li><Icon name="server" />Node.js</li>
+                <li><Icon name="database" />MS SQL Server</li>
+                <li><Icon name="fire" />Firebase</li>
+                <li><Icon name="git" />Git</li>
+              </ul>
+            </td></tr>
+            <tr><th scope="row">this site</th><td>
+              <ul class="icon-list">
+                <li><Icon name="robot" />designed and built end to end with AI</li>
+                <li><Icon name="claude" />Claude · Astro · GitHub Pages</li>
+              </ul>
+            </td></tr>
+            <tr><th scope="row">open to</th><td>
+              <ul class="open-to">
+                <li><Icon name="people" />collabs</li>
+                <li><Icon name="briefcase" />consulting</li>
+                <li><Icon name="mic" />talks</li>
+                <li><Icon name="github" />open source</li>
+              </ul>
+            </td></tr>
+            <tr><th scope="row">reach</th><td><a class="spec-email" href="mailto:hello@nidhy.dev"><Icon name="envelope" />hello@nidhy.dev</a></td></tr>
+          </table>
+        </div>
+
+        <div class="ledger">
+          <div class="ledger-head">measured results</div>
+          <dl class="ledger-grid">
+            <div class="wide"><dt>total savings across projects</dt><dd class="red">$175–250K</dd></div>
+            <div><dt>improvement projects delivered</dt><dd>25+</dd></div>
+            <div><dt>people using what I've built</dt><dd>250+</dd></div>
+            <div><dt>dashboards built</dt><dd class="gold">15+</dd></div>
+            <div><dt>in-house cloud apps, built with AI</dt><dd>6</dd></div>
+          </dl>
         </div>
       </div>
     </div>
@@ -366,24 +385,74 @@ build_w  = "AI-assisted, shipped publicly"`}</CodeBlock>
   .subscribe-soon { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: rgba(232,228,216,0.4); margin: 0; }
   .beehiiv-embed { border: none; overflow: hidden; width: 100%; height: 52px; }
 
-  /* About */
-  .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-5); align-items: start; }
-  .about-left { display: flex; flex-direction: column; gap: var(--space-3); }
-  .about-bio { font-size: 15px; line-height: 1.6; margin: 0; }
-  .about-quote { font-family: var(--font-serif); font-style: italic; font-size: 15px; line-height: 1.5; color: var(--ink); border-left: 3px solid var(--signal); padding-left: var(--space-3); margin: 0; }
-  .about-subsection { border-top: var(--border); padding-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
-  .about-subsection-label { font-family: var(--font-mono); font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.3em; color: var(--ink-60); margin: 0; }
-  .about-outside { font-size: 14px; line-height: 1.6; color: var(--ink-60); margin: 0; }
-  .about-chips { display: flex; gap: 8px; flex-wrap: wrap; }
-  .about-contact { font-family: var(--font-mono); font-size: 13px; color: var(--ink-60); margin: 0; }
-  .about-email { color: var(--blood); text-decoration: none; font-weight: 700; }
-  .about-right { display: flex; flex-direction: column; gap: var(--space-3); }
+  /* About — spec sheet */
+  .spec {
+    display: grid;
+    grid-template-columns: 5fr 7fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: "photo info" "ledger info";
+    column-gap: var(--space-5);
+    row-gap: var(--space-4);
+  }
+  .spec-photo { grid-area: photo; position: relative; padding-right: var(--space-3); }
+  .spec-info { grid-area: info; }
+  .ledger { grid-area: ledger; align-self: end; margin-right: var(--space-3); }
+
+  /* photo: grayscale on paper + faint halftone, framed with a hard shadow */
+  .photo { position: relative; aspect-ratio: 1; border: var(--border); background: var(--paper); box-shadow: var(--shadow-red); overflow: hidden; }
+  .photo img { display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.25) brightness(1.08); mix-blend-mode: multiply; }
+  .photo::after { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(var(--ink) 22%, transparent 23%); background-size: 4px 4px; opacity: 0.14; mix-blend-mode: multiply; }
+  .callout { position: absolute; display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; background: var(--paper); border: 2px solid var(--ink); padding: 4px 8px; white-space: nowrap; }
+  .callout i { font-style: normal; font-family: var(--font-display); font-size: 16px; color: var(--blood); letter-spacing: 0; }
+  .callout--1 { top: 12%; right: 0; }
+  .callout--2 { top: 46%; left: -12px; }
+  .callout--3 { bottom: 8%; right: var(--space-2); }
+
+  .spec-label { display: inline-block; font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--blood); padding: 4px 10px; border: 1.5px solid currentColor; }
+  .spec-headline { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 4vw, 44px); line-height: 0.95; text-transform: lowercase; margin: var(--space-2) 0 var(--space-1); }
+  .spec-headline .dot { color: var(--blood); }
+  .spec-tagline { font-family: var(--font-serif); font-style: italic; font-size: clamp(17px, 1.8vw, 20px); line-height: 1.3; color: var(--ink-60); margin: 0 0 var(--space-3); }
+  .spec-bio { font-size: 15px; line-height: 1.6; margin: 0 0 var(--space-3); max-width: 60ch; }
+  .spec-bio strong { font-weight: 700; }
+  .spec-status { display: inline-flex; align-items: center; gap: 10px; flex-wrap: wrap; border: 2px solid var(--ink); padding: 8px 12px; font-family: var(--font-mono); font-size: 13px; color: var(--ink); text-decoration: none; }
+  .spec-status:hover { border-color: var(--blood); color: var(--blood); }
+  .spec-status b { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--signal); }
+  .status-dot { width: 10px; height: 10px; background: var(--signal); flex-shrink: 0; }
+
+  .spec-table { width: 100%; border-collapse: collapse; margin-top: var(--space-3); font-size: 13px; }
+  .spec-table th { text-align: left; vertical-align: top; width: 130px; padding: 12px 16px 12px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-60); border-bottom: var(--divider-dashed); }
+  .spec-table td { padding: 12px 0; line-height: 1.5; border-bottom: var(--divider-dashed); }
+  .icon-list, .open-to { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; }
+  .icon-list { gap: 8px 16px; }
+  .icon-list li { display: inline-flex; align-items: center; gap: 6px; }
+  .open-to { gap: 6px; }
+  .open-to li { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; border: 2px solid var(--ink); padding: 5px 10px; }
+  .spec-email { display: inline-flex; align-items: center; gap: 8px; color: var(--blood); font-weight: 700; text-decoration: none; }
+  .spec-email:hover { text-decoration: underline; }
+  .spec-table :global(svg) { width: 15px; height: 15px; flex-shrink: 0; }
+
+  .ledger { border: var(--border); background: var(--paper); }
+  .ledger-head { background: var(--ink); color: var(--paper); font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.3em; text-transform: uppercase; padding: 8px 12px; }
+  .ledger-grid { display: grid; grid-template-columns: 1fr 1fr; margin: 0; }
+  .ledger-grid > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; padding: 14px 12px; border-bottom: var(--divider-dashed); }
+  .ledger-grid > div:nth-child(even) { border-right: var(--divider-dashed); }
+  .ledger-grid > div:nth-last-child(-n+2) { border-bottom: none; }
+  .ledger-grid > .wide { grid-column: 1 / -1; }
+  .ledger dd { margin: 0; font-family: var(--font-display); font-size: clamp(22px, 2.4vw, 30px); line-height: 1; white-space: nowrap; }
+  .ledger .wide dd { font-size: clamp(28px, 3.2vw, 40px); }
+  .ledger dd.red { color: var(--blood); }
+  .ledger dd.gold { color: var(--gold); }
+  .ledger dt { font-family: var(--font-mono); font-size: 11px; line-height: 1.4; color: var(--ink-60); }
 
   @media (max-width: 768px) {
-    .about-grid { grid-template-columns: 1fr; }
+    .spec { grid-template-columns: 1fr; grid-template-rows: none; grid-template-areas: "photo" "info" "ledger"; row-gap: var(--space-5); }
+    .spec-photo { padding-right: var(--space-2); }
+    .ledger { margin-right: 0; }
+    .callout { font-size: 10px; letter-spacing: 0.1em; }
+    .callout--2 { left: 0; }
+    .spec-table th { width: 88px; }
     .container { padding: 0 var(--space-2); }
     .hero { padding-left: var(--space-2); padding-right: var(--space-2); }
-    .about-right { max-width: 100%; overflow: hidden; }
   }
   @media (prefers-reduced-motion: reduce) {
     .post-row, .project-card { transition: none; }
