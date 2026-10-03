@@ -4,7 +4,7 @@
 
 *industrial engineer · systems thinker · AI builder*
 
-**[nidhy.dev](https://nidhy.dev)** &nbsp;·&nbsp; [linkedin](https://www.linkedin.com/in/dnidhin97/) &nbsp;·&nbsp; [github](https://github.com/crackcode09) &nbsp;·&nbsp; [email](mailto:dileepkumarnidhin@outlook.com)
+**[nidhy.dev](https://nidhy.dev)** &nbsp;·&nbsp; [linkedin](https://www.linkedin.com/in/dnidhin97/) &nbsp;·&nbsp; [github](https://github.com/crackcode09) &nbsp;·&nbsp; [email](mailto:hello@nidhy.dev)
 
 ![Astro](https://img.shields.io/badge/Astro_6-FF5D01?style=flat-square&logo=astro&logoColor=white)
 ![GitHub Pages](https://img.shields.io/badge/GitHub_Pages-181717?style=flat-square&logo=github&logoColor=white)
