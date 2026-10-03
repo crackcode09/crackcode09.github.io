@@ -16,23 +16,6 @@ const writing = defineCollection({
   }),
 });
 
-const courses = defineCollection({
-  loader: glob({ pattern: '**/[^_]*.json', base: './src/content/courses' }),
-  schema: z.object({
-    title: z.string(),
-    slug: z.string(),
-    description: z.string(),
-    status: z.enum(['live', 'coming-soon', 'draft']),
-    label: z.string(),
-    accent: z.enum(['green', 'red', 'gold', 'default']),
-    modules: z.number(),
-    projects: z.number(),
-    duration: z.string(),
-    cost: z.string(),
-    repo: z.string().url(),
-  }),
-});
-
 const projects = defineCollection({
   loader: glob({ pattern: '**/[^_]*.json', base: './src/content/projects' }),
   schema: z.object({
@@ -47,4 +30,4 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { writing, courses, projects };
+export const collections = { writing, projects };
