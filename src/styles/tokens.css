@@ -23,6 +23,7 @@
 
   /* ---- TINTS / DERIVED ---- */
   --ink-60: rgba(11, 14, 13, 0.6);   /* muted ink for secondary text */
+  --ink-70: rgba(11, 14, 13, 0.7);   /* body text on the deeper paper-2 surface (6:1) */
   --ink-30: rgba(11, 14, 13, 0.3);   /* hairline / dashed dividers */
   --ink-12: rgba(11, 14, 13, 0.12);  /* faint rules on paper */
   --paper-soft: #cfe8df;             /* pale green-tint used as code text on ink */
@@ -51,9 +52,10 @@
      ---------------------------------------------------------------- */
 
   /* ---- FAMILIES ---- */
-  --font-display: 'Major Mono Display', monospace; /* headlines — ALWAYS lowercase */
-  --font-serif: 'Fraunces', serif;                 /* warmth / pull-quotes — italic */
-  --font-mono: 'Space Mono', monospace;            /* body & technical text */
+  /* --font-display (Major Mono Display: headlines, ALWAYS lowercase),
+     --font-serif (Fraunces: warmth / pull-quotes, italic) and
+     --font-mono (Space Mono: body & technical text) are defined by the
+     <Font> tags in src/layouts/Base.astro, configured in astro.config.mjs. */
 
   /* ---- DISPLAY SCALE (Major Mono Display) ---- */
   --display-xl: 96px;   /* hero headline */
