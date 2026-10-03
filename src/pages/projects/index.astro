@@ -69,8 +69,7 @@ const liftColors: Record<string, string> = {
 
 <style>
   .projects-page {
-    min-height: 60vh;
-    padding: var(--space-6) 0;
+    padding: var(--space-5) 0;
   }
   .container {
     max-width: var(--container-page);
@@ -84,7 +83,6 @@ const liftColors: Record<string, string> = {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
-    max-width: 64ch;
   }
   .page-title {
     font-family: var(--font-display);
@@ -100,6 +98,7 @@ const liftColors: Record<string, string> = {
     line-height: 1.5;
     color: var(--ink-60);
     margin: 0;
+    max-width: 64ch;
   }
   .projects-grid {
     display: grid;
@@ -122,7 +121,6 @@ const liftColors: Record<string, string> = {
     box-shadow: 12px 12px 0 var(--card-accent, var(--blood));
   }
   .project-card--muted {
-    opacity: 0.65;
     cursor: default;
   }
   .project-name {
@@ -141,14 +139,15 @@ const liftColors: Record<string, string> = {
     font-family: var(--font-mono);
     font-size: 13px;
     line-height: 1.6;
-    color: var(--ink-60);
+    color: var(--ink-70);
     flex: 1;
     margin: 0;
   }
   .coming-soon-label {
     font-family: var(--font-mono);
     font-size: 10px;
-    color: var(--ink-60);
+    font-weight: 700;
+    color: var(--ink-70);
     text-transform: uppercase;
     letter-spacing: 0.25em;
     border-top: 1px dashed var(--ink-60);
