@@ -45,7 +45,7 @@ Built with Astro 7, static output, deployed via GitHub Pages from `crackcode09/c
 - `ci.yml` runs on pushes to `dev` and on PRs into `dev` and `main`, with a read-only token. It runs `npm audit --audit-level=critical` before the build.
 - `deploy.yml` gives `pages: write` and `id-token: write` to the deploy job only.
 - Dependabot (`.github/dependabot.yml`) opens weekly npm and Actions update PRs against `dev`.
-- `public/.well-known/security.txt` (RFC 9116) expires 2027-10-01: renew the `Expires:` date before then. Dependabot skips major upgrades of `actions/upload-pages-artifact`, because v4 drops dot-folders like `.well-known` from the deploy.
+- `public/.well-known/security.txt` (RFC 9116) expires 2027-10-01: renew the `Expires:` date before then. `deploy.yml` sets `include-hidden-files: true` on `actions/upload-pages-artifact`; without it (v4+) dot-folders like `.well-known` are left out of the deploy.
 
 > **Why `--merge` not `--squash` for dev→main:** Squash rewrites commit SHAs, causing history divergence. Every subsequent dev→main PR then conflicts even with identical content. Regular merge preserves the commit graph permanently.
 
