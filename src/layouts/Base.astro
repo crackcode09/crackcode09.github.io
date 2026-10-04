@@ -44,7 +44,7 @@ const ogUrl = new URL(Astro.url.pathname, site).href;
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline' https://subscribe-forms.beehiiv.com; style-src 'self' 'unsafe-inline'; font-src 'self'; frame-src https://embeds.beehiiv.com https://subscribe-forms.beehiiv.com; connect-src https://subscribe-forms.beehiiv.com https://api.beehiiv.com; img-src 'self' data: https://*.beehiiv.com;"
+      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:;"
     />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -52,6 +52,7 @@ const ogUrl = new URL(Astro.url.pathname, site).href;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <link rel="alternate" type="application/rss+xml" title="field notes · nidhy.dev" href="/rss.xml" />
     <meta name="theme-color" content="#0b0e0d" />
     <!-- preload what the first screen needs; italic and serif files load on demand -->
     <Font cssVariable="--font-display" preload />
