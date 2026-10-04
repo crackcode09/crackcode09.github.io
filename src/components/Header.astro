@@ -11,7 +11,7 @@ import Button from './Button.astro';
       <a href="/#work">work</a>
       <a href="/#writing">writing</a>
       <a href="/#about">about</a>
-      <Button href="/#writing" size="sm" class="subscribe-btn">subscribe</Button>
+      <Button href="mailto:hello@nidhy.dev" size="sm" class="cta-btn">say hi</Button>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="open menu" aria-expanded="false" aria-controls="main-nav">
       <span></span><span></span><span></span>
@@ -21,7 +21,7 @@ import Button from './Button.astro';
     <a href="/#work">work</a>
     <a href="/#writing">writing</a>
     <a href="/#about">about</a>
-    <a href="/#writing" class="mobile-subscribe">subscribe</a>
+    <a href="mailto:hello@nidhy.dev" class="mobile-cta">say hi</a>
   </div>
 </header>
 
@@ -76,8 +76,8 @@ import Button from './Button.astro';
     text-decoration: none;
   }
   nav a:not(.btn):hover { color: var(--blood); }
-  nav :global(.subscribe-btn) { background: var(--blood); border-color: var(--blood); color: var(--paper); }
-  nav :global(.subscribe-btn:hover) { background: var(--ink); border-color: var(--ink); }
+  nav :global(.cta-btn) { background: var(--blood); border-color: var(--blood); color: var(--paper); }
+  nav :global(.cta-btn:hover) { background: var(--ink); border-color: var(--ink); }
 
   /* Hamburger button — hidden on desktop */
   .hamburger {
@@ -125,7 +125,7 @@ import Button from './Button.astro';
   }
   .mobile-menu a:last-child { border-bottom: none; }
   .mobile-menu a:hover { color: var(--blood); }
-  .mobile-menu .mobile-subscribe {
+  .mobile-menu .mobile-cta {
     color: var(--paper);
     background: var(--blood);
     text-align: center;
@@ -133,7 +133,7 @@ import Button from './Button.astro';
     margin-top: var(--space-2);
     border-bottom: none;
   }
-  .mobile-menu .mobile-subscribe:hover { background: var(--ink); color: var(--paper); }
+  .mobile-menu .mobile-cta:hover { background: var(--ink); color: var(--paper); }
 
   @media (max-width: 540px) {
     nav a { display: none; }

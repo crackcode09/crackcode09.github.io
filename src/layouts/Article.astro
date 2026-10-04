@@ -37,7 +37,7 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
       </div>
 
       <aside class="article-subscribe">
-        <p class="subscribe-label">enjoyed this? get new articles in your inbox</p>
+        <p class="subscribe-label">enjoyed this? follow new field notes via <a href="/rss.xml">rss →</a></p>
       </aside>
 
       <nav class="article-nav">
@@ -240,6 +240,8 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
     color: var(--ink-60);
     margin-bottom: var(--space-2);
   }
+  .subscribe-label a { color: var(--blood); font-weight: 700; text-decoration: none; }
+  .subscribe-label a:hover { text-decoration: underline; }
 
   /* Back nav */
   .article-nav {
