@@ -17,3 +17,8 @@ updates:
     target-branch: dev
     schedule:
       interval: weekly
+    ignore:
+      # upload-pages-artifact v4+ drops every dot-folder from the artifact (no opt-out),
+      # which would silently unpublish /.well-known/security.txt. Stay on v3 until handled.
+      - dependency-name: actions/upload-pages-artifact
+        update-types: ["version-update:semver-major"]
