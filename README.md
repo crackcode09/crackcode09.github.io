@@ -93,6 +93,9 @@ featured: false
 ---
 ```
 
+Images (framed, numbered captions), a sources list with logos, and collaborators: see
+*Images, sources and collaborators* in `CLAUDE.md`.
+
 ### project
 
 Create `src/content/projects/[slug].json`:
