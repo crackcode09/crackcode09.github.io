@@ -13,15 +13,16 @@ const {
   href,
   type = 'button',
   disabled = false,
+  class: className,
   ...rest
 } = Astro.props;
 ---
 {href ? (
-  <a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`]} {...rest}>
+  <a href={href} class:list={['btn', `btn--${variant}`, `btn--${size}`, className]} {...rest}>
     <slot />
   </a>
 ) : (
-  <button type={type} disabled={disabled} class:list={['btn', `btn--${variant}`, `btn--${size}`]} {...rest}>
+  <button type={type} disabled={disabled} class:list={['btn', `btn--${variant}`, `btn--${size}`, className]} {...rest}>
     <slot />
   </button>
 )}
