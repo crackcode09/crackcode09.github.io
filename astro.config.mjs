@@ -1,8 +1,12 @@
 import { defineConfig, fontProviders } from 'astro/config';
+import { satteri } from '@astrojs/markdown-satteri';
+import figures from './src/lib/markdown-figures.mjs';
 
 export default defineConfig({
   site: 'https://nidhy.dev',
   output: 'static',
+  // field note images on their own line become numbered, captioned figures
+  markdown: { processor: satteri({ hastPlugins: [figures] }) },
   // the course was retired — send old course links to the homepage
   redirects: {
     '/courses': '/',
