@@ -49,3 +49,16 @@ npm run dev      # http://localhost:4321
 ```
 
 Found a security issue? See [security.txt](https://nidhy.dev/.well-known/security.txt).
+
+## license
+
+The **code** is MIT licensed: see [LICENSE](LICENSE).
+
+The **content is not**: writing, project write-ups, photos and the nidhy.dev name, wordmark and
+icons are © Nidhin Dileepkumar, all rights reserved. That covers `src/content/`, `public/images/`,
+`public/og/` and the favicons/app icons in `public/`. Please don't republish them without asking:
+[hello@nidhy.dev](mailto:hello@nidhy.dev). Quoting a line with a link back is fine.
+
+Third-party parts keep their own licences: the fonts (SIL Open Font License, files in
+`src/assets/fonts/`), Bootstrap Icons (MIT) and anime.js (MIT). Other brands' logos used in the
+icon set belong to their owners.
