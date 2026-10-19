@@ -14,6 +14,6 @@
   "dependencies": {
     "@astrojs/rss": "^4.0.19",
     "animejs": "4.5.0",
-    "astro": "^7.3.5"
+    "astro": "^7.3.6"
   }
 }
