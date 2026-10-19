@@ -13,7 +13,7 @@ sources:
     url: "https://www.bls.gov/ooh/"
 ---
 
-This post exists only on the preview branch, to show the new field-note features. A small
+This post exists only on the preview branch (built behind Cloudflare Access), to show the new field-note features. A small
 inline image ![logo](./images/iise.svg) stays on the text line.
 
 ## a diagram with a caption
