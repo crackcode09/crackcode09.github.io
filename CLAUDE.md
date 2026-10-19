@@ -11,7 +11,8 @@ Built with Astro 7, static output, deployed via GitHub Pages from `crackcode09/c
 - **Content:** Astro Content Layer API (`src/content.config.ts`)
 - **Styling:** Scoped CSS with design tokens in `src/styles/tokens.css`
 - **Components:** `src/components/` — Header, Footer, Base (layout), Label, Button, Chip, CodeBlock, Badge, Panel
-- **Fonts:** Loaded in Base.astro via Google Fonts — display (Major Mono Display), serif (Fraunces), mono (Space Mono)
+- **Fonts:** self-hosted via Astro's fonts API (`astro.config.mjs`, files in `src/assets/fonts`) — display (Major Mono Display), serif (Fraunces), mono (Space Mono)
+- **Markdown:** Astro 7's Sätteri processor (`@astrojs/markdown-satteri`, pinned to the version Astro uses — bump it with Astro) with one plugin, `src/lib/markdown-figures.mjs`
 - **Design system:** `D:\nidhin.dev\content\brand\Nidhin Design System\` — canonical source of truth
   - `guidelines/design-kit.html` — visual reference (self-contained)
   - `tokens/` — colors, typography, shape, spacing token files
@@ -103,6 +104,45 @@ featured: false    # optional, shows at top of list
 ---
 ```
 
+### Images, sources and collaborators
+
+Put a post with images in its own folder (`src/content/writing/[slug]/index.md`) with the
+images next to it. Images are optimised at build time and served from nidhy.dev (the CSP
+blocks images from other sites).
+
+```markdown
+![alt text: what a screen reader should say](./images/spc-before.png "caption shown under the figure")
+![alt text](./images/line-3.jpg "photo: shift change on line 3")
+```
+
+- An image on its own line becomes a framed figure, as wide as the text, with a numbered
+  caption (`fig. 01 · …`) taken from the quoted title. No title, no caption. Readers can
+  click a figure to open it full size.
+- Start the caption with `photo:` for photos: they get the site's grayscale treatment.
+  Diagrams and screenshots keep their colour. SVG diagrams work too.
+- Always write real alt text; the caption is not read in its place.
+
+Sources list (end of the post) and collaborators, in the frontmatter:
+
+```yaml
+sources:
+  - name: "Bureau of Labor Statistics"
+    url: "https://www.bls.gov/ooh/"
+    logo: "./logos/bls.svg"      # optional; saved next to the post, else the first letter shows
+with: [jane-doe]                  # file names in src/content/people/
+```
+
+Add a person once as `src/content/people/[id].json`, only with their permission:
+
+```json
+{ "name": "Jane Doe", "role": "quality engineer", "link": "https://www.linkedin.com/in/…", "photo": "./photos/jane-doe.jpg" }
+```
+
+`link` and `photo` are optional (no photo shows initials). Photos go in
+`src/content/people/photos/` and get the About photo's grayscale treatment. Projects list
+people the same way with `"collaborators": ["jane-doe"]`; they show as "built with" on
+the project card. Use logos only to point at the source they belong to.
+
 ## Adding a New Project
 
 ### Your workflow (4 steps)
@@ -133,10 +173,12 @@ Each project JSON (`src/content/projects/[slug].json`) must match:
   "blurb": "2-sentence max. What you built. Measured outcome.",
   "href": "# or /writing/case-study-slug",
   "status": "live | coming-soon | draft",
-  "featured": true
+  "featured": true,
+  "collaborators": ["jane-doe"]
 }
 ```
 
+- `collaborators` → optional, ids from `src/content/people/` (shown as "built with")
 - `featured: true` → shows on homepage (max 3 displayed)
 - `status: "draft"` → excluded from listing
 - `status: "coming-soon"` → muted non-linked card on `/projects`

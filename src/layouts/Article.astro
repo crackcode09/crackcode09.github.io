@@ -3,6 +3,9 @@ import Base from './Base.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Chip from '../components/Chip.astro';
+import Sources from '../components/Sources.astro';
+import People from '../components/People.astro';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   title: string;
@@ -11,9 +14,11 @@ interface Props {
   excerpt: string;
   readingTime?: number;
   coverImage?: string;
+  sources?: { name: string; url: string; logo?: ImageMetadata }[];
+  people?: { collection: 'people'; id: string }[];
 }
 
-const { title, date, tag, excerpt, readingTime, coverImage } = Astro.props;
+const { title, date, tag, excerpt, readingTime, coverImage, sources = [], people = [] } = Astro.props;
 
 const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
 ---
@@ -36,6 +41,9 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
         <slot />
       </div>
 
+      <People people={people} />
+      <Sources sources={sources} />
+
       <aside class="article-subscribe">
         <p class="subscribe-label">enjoyed this? follow new field notes via <a href="/rss.xml">rss →</a></p>
       </aside>
@@ -48,6 +56,20 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
 
   <Footer />
 </Base>
+
+<script>
+  // Figures open full size in a new tab (screenshots and diagrams are often detailed).
+  document.querySelectorAll<HTMLImageElement>('.article-body .fig img').forEach((img) => {
+    const link = document.createElement('a');
+    link.href = img.currentSrc || img.src;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.className = 'fig-open';
+    link.setAttribute('aria-label', `open image full size${img.alt ? `: ${img.alt}` : ''}`);
+    img.replaceWith(link);
+    link.append(img);
+  });
+</script>
 
 <style>
   .container {
@@ -214,6 +236,19 @@ const formattedDate = date.toISOString().slice(0, 10).replace(/-/g, '.');
   }
 
   .article-body :global(strong) { font-weight: 700; }
+
+  /* small images inside a sentence (an icon, a logo) sit on the text line */
+  .article-body :global(p img) { max-width: 100%; height: 1.2em; width: auto; vertical-align: -0.2em; }
+
+  /* Figures (src/lib/markdown-figures.mjs): framed, text width, numbered caption */
+  .article-body :global(.fig) { margin: var(--space-4) 0; }
+  .article-body :global(.fig img) { display: block; width: 100%; height: auto; border: var(--border); background: var(--paper-2); box-shadow: 6px 6px 0 var(--ink); }
+  .article-body :global(.fig-open) { display: block; cursor: zoom-in; }
+  .article-body :global(.fig-open:focus-visible) { outline: 3px solid var(--blood); outline-offset: 4px; }
+  .article-body :global(.fig figcaption) { font-family: var(--font-mono); font-size: 12px; line-height: 1.5; color: var(--ink-60); margin-top: 14px; max-width: 65ch; }
+  .article-body :global(.fig-num) { font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--blood); }
+  /* photos get the About photo's grayscale treatment; diagrams and screenshots keep colour */
+  .article-body :global(.fig--photo img) { box-shadow: none; filter: grayscale(1) contrast(1.2) brightness(1.05) drop-shadow(6px 6px 0 var(--blood)); }
   .article-body :global(em) { font-style: italic; }
 
   /* Footnotes */
