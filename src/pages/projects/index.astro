@@ -4,6 +4,7 @@ import Base from '../../layouts/Base.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import Label from '../../components/Label.astro';
+import People from '../../components/People.astro';
 import Chip from '../../components/Chip.astro';
 
 const allProjects = await getCollection('projects', ({ data }) => data.status !== 'draft');
@@ -44,6 +45,7 @@ const liftColors: Record<string, string> = {
                 {p.data.tags.map((t: string) => <Chip variant="outline">{t}</Chip>)}
               </div>
               <p class="project-blurb">{p.data.blurb}</p>
+              <People people={p.data.collaborators} label="built with" variant="compact" />
               <span class="coming-soon-label">case study in progress</span>
             </article>
           ) : (
@@ -57,6 +59,7 @@ const liftColors: Record<string, string> = {
                 {p.data.tags.map((t: string) => <Chip variant="outline">{t}</Chip>)}
               </div>
               <p class="project-blurb">{p.data.blurb}</p>
+              <People people={p.data.collaborators} label="built with" variant="compact" />
               <span class="read-link">read case study →</span>
             </a>
           );
