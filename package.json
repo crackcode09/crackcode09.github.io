@@ -12,9 +12,9 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/markdown-satteri": "0.4.3",
+    "@astrojs/markdown-satteri": "0.4.4",
     "@astrojs/rss": "^4.0.19",
     "animejs": "4.5.0",
-    "astro": "^7.3.6"
+    "astro": "^7.4.1"
   }
 }
