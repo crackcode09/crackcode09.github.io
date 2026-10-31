@@ -8,12 +8,12 @@ import Label from '../components/Label.astro';
 
 <Base title="404 · process defect · nidhin dileepkumar" description="This page has a defect.">
   <script is:inline>
-    // The IE Knowledgebase moved from nidhy.dev/ie-knowledgebase/ to its own domain. Its main pages
+    // The IE Knowledgebase moved from nidhy.dev/ie-knowledgebase/ to The IE Hub (theiehub.com). Its main pages
     // have redirect pages in public/ie-knowledgebase/; anything else under that path (course files,
     // old deep links) lands here and goes to the same path on the new site, query and #… included.
     (function () {
       var m = location.pathname.match(/^\/ie-knowledgebase(?:\/public)?(\/.*)?$/);
-      if (m) location.replace('https://ieknowledgebase.nidhy.dev' + (m[1] || '/') + location.search + location.hash);
+      if (m) location.replace('https://theiehub.com' + (m[1] || '/') + location.search + location.hash);
     })();
   </script>
   <Header />
